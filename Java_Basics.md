@@ -301,7 +301,267 @@ With build tool and with IDE:
 
 Create project with Intellij idea and execute.
 
-\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&
+\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&
+
+&nbsp;									     **Language fundamentals**
+
+
+
+
+
+Every java program has to begin with "main" method.
+
+
+
+***public class HelloWorld {***
+
+*** 	public static void main(String \[] args){***
+
+*** 		System.out.println("Hello");***
+
+*** 	}***
+
+***}***
+
+
+
+Every java program has to be saved with "FileName.java"
+
+
+
+FileName always must be "className"
+
+
+
+HelloWorld.java
+
+***public class HelloWorld {***
+
+**\*\*\* 	public static void main(String \[] args){\*\*\***
+
+**\*\*\* 		System.out.println("Hello");\*\*\***
+
+**\*\*\* 	}\*\*\***
+
+***}***
+
+\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&
+
+&nbsp;										**Variables ,Data types, Literals**
+
+
+
+**What is Variable ?**
+
+&nbsp;Variable is a name given to a memory location where data is stored
+
+
+
+**What is Data type?**
+
+&nbsp; Data Type which describe the type of data like numbers ,chars etc....
+
+
+
+Based on Data type the programming languages are classified into two category
+
+
+
+1.Strongly typed or statically typed
+
+&nbsp;	meaning every variable must have a datatype at compile time.
+
+2.Weakly typed or dynamic typed
+
+&nbsp;	meaning every variable may not have a datatype at compile time.
+
+
+
+					**Java is strongly typed ,statically typed programming language**
+
+
+
+*How to declare variable?*
+
+	*datatype variableName=value (literals)*
+
+
+
+***Datatypes:***
+
+ *Types are classified into two category*
+
+***1.primitive data types***
+
+	*Core data types*
+
+***2.Reference data types***
+
+	*Derived type/custom data type which is created from primitive or other reference types*
+
+
+
+***primitive data types:***
+
+
+
+*1.numerical (number)*
+
+
+
+*Type            size*
+
+*1.byte         1byte*
+
+*2.short        2bytes*
+
+*3.int            4bytes*
+
+*4.long        8bytes*
+
+
+
+*5.float      4bytes*
+
+*5.double 8bytes*
+
+
+
+*2.characters (letters)*
+
+*char        2 bytes*
+
+
+
+*3.Booleans (true /false)*
+
+
+
+*boolean    1bit*
+
+
+
+***Reference types:***
+
+   *Object types or class types -  OOP*
+
+
+
+*String - Collection of characters - size varies based on number of characters*
+
+
+
+*etc....*
+
+
+
+***literals:***
+
+ *which are values stored into variable, literals has its own type*
+
+*ints,floats,doubles,chars.*
+
+
+
+*Examples:*
+
+*......................*
+
+*numbers,char,booleans*
+
+
+
+*PrimitiveDataTypesDemo.java*
+
+
+
+*public class PrimitiveDataTypesDemo {*
+
+    *public static void main(String\[] args) {*
+
+        *//whole numbers*
+
+        *byte b = 10;*
+
+        *System.out.println("Byte : " + b);*
+
+        *short s = 100;*
+
+        *System.out.println("Short : " + s);*
+
+        *int i = 1230;*
+
+        *System.out.println("Int  : " + i);*
+
+        *long l = 199999;*
+
+        *System.out.println("Long : " + l);*
+
+
+
+*//        Float and Double*
+
+        *float f = 10.7f;*
+
+        *System.out.println("Float : " + f);*
+
+        *double d = 89.78;*
+
+        *System.out.println("Double : " + d);*
+
+
+
+        *//Char*
+
+        *char c = 'a';*
+
+        *System.out.println("Char : " + c);*
+
+        *//boolean*
+
+        *boolean isEnabled = true;*
+
+        *boolean isLocked = false;*
+
+
+
+        *System.out.println("Boolean :" + isEnabled + "" + isLocked);*
+
+
+
+
+
+    *}*
+
+*}*
+
+
+
+*Reference type:*
+
+ *Strings*
+
+*ReferenceTypes.java*
+
+*public class ReferenceTypes {*
+
+    *public static void main(String\[] args) {*
+
+        *String name = "Subramanian Murugan";*
+
+        *System.out.println("Name " + name);*
+
+        *String city = "Coimbatore";*
+
+        *System.out.println("City " + name);*
+
+    *}*
+
+*}*
+
+
+
+
 
 
 
