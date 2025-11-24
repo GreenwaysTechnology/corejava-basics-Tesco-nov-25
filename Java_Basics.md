@@ -559,6 +559,320 @@ Based on Data type the programming languages are classified into two category
 
 *}*
 
+*\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&*
+
+										*Operators*
+
+
+
+*Operators are symbols used to perform operations on variables and values.*
+
+
+
+*Java operators are classified into 7 main categories:*
+
+
+
+1\.Arithmetic Operators
+
+2\.Unary Operators
+
+3\.Relational (Comparison) Operators
+
+4\.Logical Operators
+
+5\.Bitwise Operators
+
+6\.Assignment Operators
+
+7\.Ternary Operator
+
+
+
+Arithmetic Operators:
+
+&nbsp; Perform mathematical operations
+
++,-,\*,/,%
+
+
+
+
+
+*ArithmeticOperatorsDemo.java*
+
+*public class ArithmeticOperatorsDemo {*
+
+    *public static void main(String\[] args) {*
+
+        *int a = 10;*
+
+        *int b = 20;*
+
+        *int add = a + b;*
+
+        *System.out.println("Addition :" + add);*
+
+        *int substraction = a - b;*
+
+        *System.out.println("Substraction :" + substraction);*
+
+        *int multiplication = a \* b;*
+
+        *System.out.println("Multiplication :" + multiplication);*
+
+        *int div = a / b;*
+
+        *System.out.println("Division :" + div);*
+
+        *int mod = a % b;*
+
+        *System.out.println("Mod :" + mod);*
+
+
+
+    *}*
+
+*}*
+
+
+
+*Unary operators*
+
+ *Performs mathematical operations on single **operand***
+
+***a +b - here two operand - a, b***
+
+
+
+*++,--*
+
+*++a - prefix* 
+
+*a++ - postfix*
+
+
+
+*--a - prefix*
+
+*a-- - postfix*
+
+
+
+*UnaryOperators.java*
+
+
+
+*public class UnaryOperators {*
+
+    *public static void main(String\[] args) {*
+
+        *int a = 10;*
+
+        *//First assisment and later increment*
+
+        *int result = a++;*
+
+        *System.out.println("result post fix: " + result);*
+
+        *int b = 10;*
+
+        *//increment first and assign the incremented value*
+
+        *int resultTwo = ++b;*
+
+        *System.out.println("result Pre fix: " + resultTwo);*
+
+
+
+    *}*
+
+*}*
+
+***\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&***
+
+							Relational (Comparison) Operators
+
+
+
+***Compares values and returns true or false***
+
+
+
+<i>==  - equal to</i>
+
+<i>!=   -not equal</i>
+
+<i>>  - greater /bigger</i>
+
+<i>< - lesser/smaller</i>
+
+<i>>= -greater than or equal</i>
+
+<i><= -less than or equal</i>
+
+
+
+<i>**ComparsionalOperators.java**</i>
+
+
+
+<i>**public class ComparsionalOperators {**</i>
+
+<i>    **public static void main(String\[] args) {**</i>
+
+<i>        **int a = 10;**</i>
+
+<i>        **int b = 20;**</i>
+
+<i>        **boolean resultOne = a == b;**</i>
+
+<i>        **System.out.println("A and B are equal: " + resultOne);**</i>
+
+<i>        **boolean resultTwo = a != b;**</i>
+
+<i>        **System.out.println("A and B are not equal: " + resultTwo);**</i>
+
+
+
+<i>        **boolean resultThree = a > b;**</i>
+
+<i>        **System.out.println("A is greater than B: " + resultThree);**</i>
+
+
+
+<i>        **boolean resultFour = a < b;**</i>
+
+<i>        **System.out.println("A is less than B: " + resultFour);**</i>
+
+
+
+<i>        **boolean resultFive = a >= b;**</i>
+
+<i>        **System.out.println("A is greater than B or equal to: " + resultFive);**</i>
+
+
+
+<i>        **boolean resultSix = a <= b;**</i>
+
+<i>        **System.out.println("A is lesser  than B or equal to: " + resultSix);**</i>
+
+
+
+<i>    **}**</i>
+
+<i>**}**</i>
+
+
+
+<i>**Logical Operators**</i>
+
+<i>Combine one or more boolean expressions</i>
+
+
+
+<i>**\&\&  - Logical And**</i>
+
+<i>**||  -   Logical Or**</i>
+
+<i>**!   - Logical Not**</i>
+
+
+
+<i>**The out put of this operator is based on boolean truth table**</i>
+
+
+
+<i>**A                   B                    A\&\&b**</i>
+
+<i>**true            true                 true**</i>
+
+<i>**false         false                 false**</i>
+
+<i>**true          false                 false**</i>
+
+<i>**false         true                 false**</i>
+
+
+
+<i>**A                   B                    A||b**</i>
+
+***true            true                 true***
+
+***false         false                 false***
+
+***true          false                 true***
+
+***false         true                 true***
+
+
+
+
+
+***A                   A !***                   
+
+***true            false***                 
+
+***false         true***              
+
+                
+
+*LogicalOperators.java*
+
+*public class LogicalOperators {*
+
+    *public static void main(String\[] args) {*
+
+        *int age = 25;*
+
+        *boolean hasId = true;*
+
+        *// eligbility test*
+
+        *boolean isAllowed = age >= 18 \&\& hasId;*
+
+        *System.out.println("isAllowed :" + isAllowed);*
+
+        *//or*
+
+        *boolean isHoliday = false;*
+
+        *boolean isSunday = true;*
+
+        *boolean todayDay = isHoliday || isSunday;*
+
+        *System.out.println("Today : " + todayDay);*
+
+
+
+        *//!*
+
+        *boolean isRaining = false;*
+
+        *boolean result = !isRaining;*
+
+        *System.out.println("Can i go outside :" + result);*
+
+
+
+        *//combine logical operators*
+
+        *int newAge = 20;*
+
+        *boolean hasLicense = true;*
+
+        *boolean hasCar = false;*
+
+        *boolean canDrive = (newAge >= 18 \&\& hasLicense) || hasCar;*
+
+        *System.out.println("Can Drive :" + canDrive);*
+
+
+
+    *}*
+
+*}*
+
 
 
 
