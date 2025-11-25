@@ -1030,7 +1030,103 @@ if your purchase total is greater than  10000$ - discount 8.9%
 
 
 
+										loops
 
+Loops allow you to repeat a block of code multiple times until a condition becomes false.
+
+Java supports 
+1.for loop
+2.while loop
+3.do...while loop
+4.enchanced for loop (for...each)
+
+1.for loop
+ i want to print numbers from 0 to 10
+
+for(variable declarations; condition; increment or decrement){
+	block of code to be repeated 
+}
+
+public class ForLoop {
+    public static void main(String[] args) {
+        for (int i = 0; i <= 10; i++) {
+            System.out.println("i : " + i);
+        }
+    }
+}
+
+While loop:
+ Used when number of repetitions is not known
+
+You keep drinking water until the bottle becomes empty
+public class WhileLoop {
+    public static void main(String[] args) {
+        int water = 5;
+        while (water > 0) {
+            System.out.println("Drinking water....");
+            water--; //reduce water
+        }
+    }
+}
+do...while
+ Runs at least once even if the condition is false.
+
+for eg: you try to open a door, Even if it is locked, you try at least once.
+
+public class DoWhile {
+    public static void main(String[] args) {
+        int attempts = 1;
+        do {
+            System.out.println("Trying to open door");
+            attempts++;
+        } while (attempts <= 3);
+    }
+}
+
+How to get input from the keyboard?
+import java.util.Scanner;
+
+public class InputFromTheKeyboard {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Pin");
+        int pin = sc.nextInt();
+        System.out.println("Your Pin :" + pin);
+        if (pin == 1234) {
+            System.out.println("Access Granted!");
+            return;
+        }
+        System.out.println("Card Blocked");
+    }
+}
+
+
+
+Lab:
+1.ATM PIN Retry System
+   User gets 3 attempts to correct PIN.
+	
+eg:
+    correctPin=1234
+    attempts=3
+ You have to input from the User , if pin is valid in first attempt or second attempt or third attempt, you have to print Message "Access Granted"
+  stop the loop.
+ if more than 3 attempts, you have to print Message "Card Blocked"
+
+Solution : To get input
+
+2.Restaurant Billing System -  Sum of orders
+    Add price of each item until customer enters 0
+
+Enter item price (0 to finish)
+
+ 100
+ 50
+ 34
+ 0 
+as soon as you type 0 , calculate the total item prices and show in the terminal and terminate the flow
+
+Note: you can combine loops and conditional statements
 
 
 
