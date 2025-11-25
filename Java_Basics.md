@@ -1,13 +1,10 @@
-**What is java**
-
-
+											**What is java**
 
 According to  Sun Microsystem, Java is technology.
 
 Technology means the solving practical problems
 
 Since java is technology, which might have solved some problem.
-
 
 
 In 1980s , the c and c++ was the most popular programming language for building applications.
@@ -51,7 +48,6 @@ applications in platform independent way-
 
 
 OAK Was not portable, then James and his team started reworking on the same, one day they found solution which is called 
-
 "Virtualization based computing".
 
 
@@ -92,8 +88,6 @@ Step:
 
 
 
-
-
 Java and JVM:
 
 &nbsp;Java was created to run on vm based abstractions called "Java virtual machine".
@@ -101,7 +95,6 @@ Java and JVM:
 &nbsp;	
 
 								**JVM helps to create platform independent applications**
-
 											
 
 As part of java technology James created a platform(collection of tools and technologies).
@@ -156,11 +149,9 @@ Java Versions History:
 Java -18,19,20,21(LTS),22,23...
 
 
-
 Java Applications:
 
 &nbsp;Java apps can be classified into 3 category , based on that we can classify editions of java
-
 
 
 *1.Java Standard Edition  -  java 2 / java* 
@@ -179,13 +170,11 @@ Java Applications:
 
 *After sun Microsystems , Oracle corporation acquired java technology in 2010. After that java was called Oracle java..*
 
-
-
 Who is controlling the entire java technology?
 
-
-
  		**There is open source community ,JCP -https://www.jcp.org/en/home/index, who controls the java**
+
+						JEP -Oracle Owned body to enhance any features  
 
 
 
@@ -194,11 +183,9 @@ Who is controlling the entire java technology?
 &nbsp;								 **Java Programming language**
 
 
-
 What is java programming language?
 
 &nbsp;	Java programming language is simple, robust, object oriented, multi threaded, platform independent  programming language
-
 
 
 Programming language fundamentals:
@@ -210,8 +197,6 @@ Programming language fundamentals:
 3.Control structures and loops
 
 4.Oo features and implementations
-
-
 
 
 
@@ -237,11 +222,7 @@ Byte code:
 
 How to setup java project?
 
-
-
 There are two ways 
-
-
 
 1.without using any build tools
 
@@ -260,7 +241,6 @@ There are two ways
 
 
 Without build tools:
-
 
 
 create project
@@ -326,7 +306,6 @@ Every java program has to begin with "main" method.
 
 
 Every java program has to be saved with "FileName.java"
-
 
 
 FileName always must be "className"
@@ -585,7 +564,7 @@ Based on Data type the programming languages are classified into two category
 
 6\.Assignment Operators
 
-7\.Ternary Operator
+7\.Ternary Operator 
 
 
 
@@ -872,6 +851,191 @@ Arithmetic Operators:
     *}*
 
 *}*
+Assignment Operators
+=    -  assignment
++=  - short cut for addition and assignment
+-=   - short cut for subtraction and assignment
+*= - short cut for multiplication  and assignment
+/=  -  short cut for division and assignment
+%= -short cut for Modulus and assignment
+
+
+AssigmentOperators.java
+
+public class AssigmentOperators {
+    public static void main(String[] args) {
+        //assigment
+        int x = 10;
+        System.out.println("X : " + x);
+        //x+=2; // x = x + 2
+        x = x + 2;
+        System.out.println("X : " + x);
+        x += 2;
+        System.out.println("X : " + x);
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								Conditional Statements
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Conditional Statements let your program make decisions
+
+There 4 types:
+
+1.if
+2.if..else
+3.if-else-if - ladder
+4.switch...case
+
+if Syntax:
+ if(condition){
+    //block of code to be executed
+ }
+condition must be always boolean value.
+
+If:
+public class ConditionalIfDemo {
+    public static void main(String[] args) {
+        int age = 20;
+        if (age >= 18) {
+            System.out.println("You are an adult");
+        }
+    }
+}
+
+if..else
+public class ConditionalIfElse {
+    public static void main(String[] args) {
+        int marks = 45;
+        if (marks >= 50) {
+            System.out.println("Pass");
+        } else {
+            System.out.println("Fail");
+        }
+    }
+}
+....
+what if i want to verify multiple conditions:
+if..else-if..else
+public class ConditionalIfelseIf {
+    public static void main(String[] args) {
+        int marks = 50;
+        if (marks >= 90) {
+            System.out.println("Grade A");
+        } else if (marks >= 75) {
+            System.out.println("Grade B");
+        } else if (marks >= 60) {
+            System.out.println("Grade C");
+        } else {
+            System.out.println("Grade D");
+        }
+    }
+}
+
+Multiple equal conditions if you want to test , you can use switch ..case
+
+switch (value) {
+
+	case condition-1:
+		 execute code
+		break;
+         case condition-2:
+		 execute code
+		break;
+	case condtion-3:
+		 execute code
+		break;
+	default:
+		execute code
+
+}
+
+public class SwitchCaseDemo {
+    public static void main(String[] args) {
+        int day = 3;
+        switch (day) {
+            case 1:
+                System.out.println("Monday");
+                break;
+            case 2:
+                System.out.println("Tuesday");
+                break;
+            case 3:
+                System.out.println("Wednesday");
+                break;
+            case 4:
+                System.out.println("Thursday");
+                break;
+            case 5:
+                System.out.println("Friday");
+                break;
+            case 6:
+                System.out.println("Saturday");
+                break;
+            default:
+                System.out.println("Invalid Day");
+
+        }
+    }
+}
+&&&&&&&&&&&&&
+Short cut to if..else  : Ternary Operator.
+
+
+public class TernaryOperator {
+    public static void main(String[] args) {
+        int age = 16;
+        String status = "";
+        if (age >= 18) {
+            status = "Adult";
+        } else {
+            status = "Minor";
+        }
+        System.out.println("Status :" + status);
+        //short cut to the above code
+        status = (age >= 18) ? "Adult" : "Minor";
+        System.out.println("Status :" + status);
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Lab:
+1.Write a java code to test temperature - Weather report
+  
+if temp greater than 40 - you have print "very hot"
+if temp greater than 30 - you have print "hot"
+if temp greater than 20  and less than 30 - you have print "warm"
+if temp less than 20  - you have print "cold"
+if temp less than 0  - you have print "Very cold"
+
+2.you have to declare purchase total, and calculate total discount and total value.
+
+if your purchase total is greater than 1000$ and less than 3500$ - discount 3.8%
+if your purchase total is greater than 3500$ and less than 5000$ - discount 4.2%
+if your purchase total is greater than 5000$ and less than 10000$ - discount 5.3%
+if your purchase total is greater than  10000$ - discount 8.9%
+
+3.Traffic Light system
+
+ if Signal  - 1 -red 2-green- 3- yellow, other than these value invalid
+ you have to print message Ready, Stop, Go , according to the values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
