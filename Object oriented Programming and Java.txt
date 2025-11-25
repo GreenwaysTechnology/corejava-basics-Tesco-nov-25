@@ -1,0 +1,242 @@
+									Object oriented Programming and Java
+
+What is Object orientation?
+	It is one of the programming paradigms.
+       Paradigms are styles or approaches to programming that define how code is structured, written, and executed
+
+		They guide how developers think about problems and how programs should be organized
+
+Major Programming paradigms:
+
+1.Imperative Programming
+	Tell the computer how to do things step by step
+c,java,js
+2.Procedural programming (Subset of imperative)
+	organizes the code into procedures or functions
+languages which follows procedural programming is
+  c, pascal, FORTRAN
+3.Object oriented programming 
+	organizes the code into classes and objects
+  object/class consist of data + behavior
+  eg: c++,java,C# etc...
+4.Functional Programming
+	organizes the code based on functions not state(data)
+  eg: javascript, java
+etc....
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									Object orientation 
+Focus:
+  Organize the code into classes and objects.
+  code means
+	-having data (state) - variables
+	-having behavior (methods) - which change /mutate the data
+
+ object/class = {
+	state + behavior
+} 
+
+	any programming paradigm has set of principles, based on those principles only language works
+
+Principles of Object orientation:
+
+Grady Booch principles:
+
+1.Abstraction
+2.Encapsulation
+3.Modularity
+4.Hierarchy
+5.Typing
+******************************** Required 
+6.Concurrency
+7.Persistency
+
+		 if any language follows the first 5 principles the language called as "Object oriented Programming language"
+
+We are going to talk about each principle what it is? and how it can be implemented?
+
+1.Abstraction:
+	Take necessary information from the real world object eg: know about basic information about car what you are driving 	
+
+Principles of abstraction:
+1.focus on essential characteristics
+2.Ignore unnecessary details
+3.Model things based what they do, not how they work internally.
+		if you start car without knowing how the engine internally ignites.
+
+How to apply abstraction in software system?
+  
+For eg, if you are designing banking system, you want capture various information.
+In banking system, who is primary actor?
+	Customer 
+Customer is just human being, Human being is associated with "millions of properties" eg 
+           : age,dob,gender,height,wieght,skin color,address,name,etc....
+
+if you represent human being in banking system, what information you capture as customer
+
+1.name - firstname,lastname,middlename
+2.address
+3.adhar card/ssn
+4.PAN
+5.dob
+6.age
+7.mobile no
+8.email id
+9.type of account
+etc.....
+
+How to implement abstraction in java?
+
+	class
+what is class?
+	In general, Class is a container which captures necessary information about "real time entity /object/thing"
+	class = {
+		information about customer, patient, Employee, Passenger
+	}
+     In programming languages , class is "data type" - Custom Data type or Reference Data type
+    class contains two things one data + behavior 
+
+	class  = {
+		data(state) 
+		behavior (methods)
+	}
+
+Syntax:
+	public  class Customer {}
+	public class Patient {}
+	public class Employee {}
+
+eg:
+public class Customer {
+    //state
+    int id;
+    String name;
+    String address;
+    String email;
+    String phoneNo;
+    String SSN;
+    double amount;
+    String accountType;
+}
+
+Object:
+			According to Booch, "An Object is a thing, both tangible and intangible, that has state, behavior, and identity"
+								Object could be any thing but that should be related  to the Problem Domain
+
+According to java, Object is the implementation of class.
+
+Where as class is blue print, Object is implementation.
+
+Class is Going to capture state and its behavior, Object is going to allocate memory during runtime
+
+					class is compile time thing , where as object is runtime thing.
+
+Object Creation Syntax:
+
+	Type variable = new ClassName() /ConstructorCall()
+
+					Operator - Memory Allocation Operator
+						|		
+	ClassName variable = new ClassName() -Memory allocated for this blue print
+		|              |
+	Reference Type	     Reference variable
+
+public class CustomerMain {
+    public static void main(String[] args) {
+        //create instance/object from the class
+        Customer customer = new Customer();
+        
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 State Representation and Process
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+State means data
+Data is encapsulated inside variables 
+variables are subject to change
+Some variable's value change over period of time , some variable's value may not change
+for age , value changes every year, but dob may not change.
+
+		if any variable is declared inside "class" those variables are called as "Instance Variables"
+
+Variables category:
+
+Based on data type:
+1.Primitive variables 
+		variables declared with primitive data type
+	int a, float b, char c
+2.Reference variables
+	 Customer customer,Order order,Address address;
+
+Based on Declarations:
+1.instance variables
+	any variable with any type , declared with in class 
+class Customer {
+	int id ;  // This is instance variable ; This is "instance primitive variable"
+	Address address; // This is instance variable ; This is "instance Reference variable"
+}
+2.local variables
+	any variables are declared within "method" with any type called local variable
+
+public static void main(String[] args) {
+        //create instance/object from the class
+        Customer customer = new Customer(); //local variable ;  local reference variable
+	int a=10; //local variables; local primitive   variable 
+
+    }
+3.static variables
+	To be discussed later.
+
+.........................................................................................................................................................................................................................................
+										 State(instance variable initialization)
+
+
+There are different ways we can initialize the instance variables
+
+1.inside class directly 
+2.outside the class directly - during runtime , using object references
+3.inside class via constructors - during runtime
+4.outside the class via "some special methods"
+
+1.inside class directly 
+public class Customer {
+    //instance variables - state
+    int id = 1;
+    String name = "Subramanian Murugan";
+    String address = "Coimbatore, Tamil Nadu, India";
+    String email = "sasubramanian_md@hotmail.com";
+    String phoneNo = "9003706368";
+    String SSN = "232323232323132213";
+    double amount = 1000000;
+    String accountType = "Current Account";
+}
+
+How to access the  instance variables outside class
+>You have to create object/instance
+>You have to access the instance variables via "Reference variables" only.
+
+referencevariable.instancevariable
+public class CustomerMain {
+    public static void main(String[] args) {
+        //create instance/object from the class
+        Customer customer = new Customer();
+        System.out.println("Id :" + customer.id);
+        System.out.println("Name :" + customer.name);
+        System.out.println("Address :" + customer.address);
+        System.out.println("Email :" + customer.email);
+        System.out.println("Phone  :" + customer.phoneNo);
+        System.out.println("SSN :" + customer.SSN);
+        System.out.println("Amount :" + customer.amount);
+        System.out.println("Account Type :" + customer.accountType);
+
+
+    }
+}
+
+
+
+
+
+
+
