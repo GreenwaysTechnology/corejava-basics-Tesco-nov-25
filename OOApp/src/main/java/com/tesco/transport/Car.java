@@ -1,17 +1,21 @@
+package com.tesco.transport;
+
 public class Car {
     //state
-    String name;
-    int speed;
+    public String name;
+    public int speed;
+
     //behaviour //methods
-    void start() {
+    public void start() {
         System.out.println(name + " Started");
     }
-    void acclerate(int increment) {
+
+    public void acclerate(int increment) {
         speed += increment;
         System.out.println("Speed is now : " + speed);
     }
 
-    void stop() {
+    public void stop() {
         speed = 0;
         System.out.println(name + " Stopped");
     }

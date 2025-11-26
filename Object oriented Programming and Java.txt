@@ -359,6 +359,456 @@ Rules:
  Next 100 units = 7 / unit
 Above 200 units = 10 / unit
 
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								    			Encapsulation 
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Encapsulation means wrapping data(variables) and actions (methods) into a single unit -  a class-- and restricting direct access to some components
+									  Who can see and who can access
+
+			 							 "Preventing code sharing"
+
+code is represented into classes which contains data and methods.
+how classes are organized , classes are organized into folders which is called packages in java
+
+	In Real time applications, you write more number of classes, all classes someway  have to be organized 
+		
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										Modularity 
+
+How to organize /modularize the code?
+		packages
+
+What is package ?
+  package is a folder-like structure used to group related classes, interfaces, and subpackages
+
+Packages help to :
+organize the code
+Avoid class name conflict 
+Provide access control
+Reuse classes easily
+
+Note:
+ Every java project has to be organized with help of packages only.
+
+
+syntax:
+   org.organizationName.projectname.subproject ..
+   com.companyName.projectname.subproject ....
+   java.projectname.subproject
+   javax.projectname.subject
+
+Types of packages:
+1.built in packages
+	 packages which are part of the language
+	 built in packages starts with java. or javax 
+	 built in package name cant be used by us for our own packages
+
+	java.lang -  basic classes related to language
+	java.util - datastructure
+	java.io -  input and output
+	java.net - networking
+	java.sql - database
+
+2.Custom packages
+	packages what we create
+	eg:
+	 " com.tesco.banking.loan.housing"
+3.Third packages
+	packages which are distributed by "thrid parties"
+	frameworks,libs
+	for eg: spring,apache camel,log4ji
+
+how to create package and how to use the package
+
+package com.tesco.banking;
+
+how to use package?
+import com.tesco.banking.className;
+
+
+eg:
+package com.tesco.hr;
+
+public class Employee {
+    int id;
+    String name;
+}
+package com.tesco.hr.app;
+
+import com.tesco.hr.Employee;
+
+public class HRMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        //employee.id=1;
+
+    }
+}
+here you cant access id why? will discuss
+
+
+package com.tesco.hr;
+
+public class EmployeeAppMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        employee.id=1;
+    }
+}
+here you can access id ? why
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								    Encapsulations Implementation
+
+Via access modifiers:
+
+java provides 4 access modifiers
+
+1.public 
+2.private
+3.default -no keyword
+4.protected 
+
+these keywords are applied on classes, instance variables, methods
+
+public:
+ can be applied on classes,variables,methods
+public means , if you declare any thing public.
+you can access any where in the app, you can access outside the current package
+public class Customer{}
+
+public class Customer {
+	public int id;
+}
+public class Car {
+    public void start(){}
+}
+
+eg:
+package com.tesco.hr;
+
+public class Employee {
+    public int id;
+    public String name;
+}
+
+eg:
+package com.tesco.transport;
+
+public class Car {
+    //state
+    public String name;
+    public int speed;
+
+    //behaviour //methods
+    public void start() {
+        System.out.println(name + " Started");
+    }
+
+    public void acclerate(int increment) {
+        speed += increment;
+        System.out.println("Speed is now : " + speed);
+    }
+
+    public void stop() {
+        speed = 0;
+        System.out.println(name + " Stopped");
+    }
+}
+package com.google.app;
+
+import com.tesco.transport.Car;
+
+public class CarMain {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.name = "BMW";
+        car.start();
+        car.acclerate(3);
+        car.stop();
+
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									      private
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+if you declare private, that is not accessible outside the class
+
+private cant be applied on classes.
+
+private
+ ->variables
+-> methods
+->constructors
+
+package com.tesco.privatedemo;
+
+public class User {
+    private int id;
+    private String userName;
+    private String email;
+    private String password;
+}
+package com.tesco.privatedemo;
+
+public class UserMain {
+    public static void main(String[] args) {
+        User user = new User();
+//        user.id;
+//        user.auth
+                
+    }
+}
+Here id and auth method not available outside the class, because it is private...
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+							 private variables and coding standard
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Common java coding Standard:
+....................................................
+
+FileName:
+->File Name must be Noun
+	Employee.java
+->First Letter must be capital case
+->FileName and class name should be same ,it can be different
+	if class is declared public , filename and class must be same 
+
+className:
+->ClassName must be noun always
+	eg:Emplolyee,Customer
+->It should start with capital case
+->if there is two nouns,the second noun must start with uppercase 
+		LoginService,EmployeeManager,LoginController,LoginDto
+->Most of the time, class must have "public" modifier, some times class maynot have any modifier - default modifer
+
+instance variables:
+ ->variables names must be noun, 
+->it should start with camel case,
+->Variables  must be meaningful to the domain
+->Variables must start with smaller
+->"All instance variables must have private modifier",
+->"Instance variables mostly not to mark public"
+eg:
+	private int employeeId;	
+	private String firstName;
+	private String salary;
+
+methods (instance and static methods)
+1.instance methods must be verb+noun or verb
+2.method must start with smaller case
+	start(),startEngine(),setX,getY
+3.method may return values or may not -void
+4.methods may take args
+5.method can return any type from primitives to references types
+6.methods can be marked "private /public /protected /no keyword(default)"
+
+package com.tesco.methods;
+
+public class Account {
+
+    public void deposit(double amount) {
+        System.out.println(amount);
+    }
+
+    private double withdraw() {
+        return 10.8;
+    }
+
+    double calculate(double input) {
+        return input * 4.5;
+    }
+
+}
+
+Types of methods:
+
+based on declaration
+1.instance methods
+2.class methods/static methods
+
+based on usage
+1.accessor and mutator methods
+	special methods which are called as "setters and getters"
+	used to initialize  the state variables and read state variables
+
+Since instance variables are private, we need these setters and getters for accessing data.
+
+setter Syntax:
+ all setters must be public
+ all setters must be void return type
+ method must start with "setVariableName"
+ method must have arg with same name and same type of instance variable
+ variable must be initialized via "this" key word
+   private int id;
+   public 	void setId(int id){
+	 this.id =id
+   }
+  Each instance variable must have its own setters.
+eg:
+package com.tesco.privatedemo;
+
+public class User {
+    private int id;
+    private String userName;
+    private String email;
+    private String password;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    private void auth() {
+        System.out.println("auth");
+    }
+}
+getters
+->getters also must be public 
+->getters must have return type of what variable you return 
+->getters must start with "getVariable"
+->getters must not have any args
+->it should return instance variable
+public int getId(){
+	return id
+}
+package com.tesco.privatedemo;
+
+public class User {
+    private int id;
+    private String userName;
+    private String email;
+    private String password;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    private void auth() {
+        System.out.println("auth");
+    }
+}
+package com.tesco.privatedemo;
+
+public class UserMain {
+    public static void main(String[] args) {
+        User user = new User();
+        user.setId(1);
+        user.setUserName("admin");
+        user.setEmail("admin@tesco.com");
+        user.setPassword("admin");
+        //i
+        System.out.println(user.getId());
+        System.out.println(user.getUserName());
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+//        user.id;
+//        user.auth
+
+    }
+}
+
+2.biz methods
+
+ methods which does some state processing
+
+deposit(),withdraw,start etc....
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									3.default -no keyword
+you can declare any thing as default...
+class,instance variables,methods,constructors
+
+class Customer{} - default class
+class Customer { 
+	int id; //default instance variable
+}
+class LoginService{
+	
+    boolean login(){} //default instance methods
+}
+
+if any thing is declared as default which is available inside the same package only
+
+package com.tesco.hr;
+
+public class Employee {
+    int id;
+    String name;
+}
+package com.tesco.hr.app;
+
+import com.tesco.hr.Employee;
+
+public class HRMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        //employee.id=1;
+
+    }
+}
+here you cant access id why? will discuss
+
+
+package com.tesco.hr;
+
+public class EmployeeAppMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        employee.id=1;
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+
+
+
+
+
+
 
 
 
