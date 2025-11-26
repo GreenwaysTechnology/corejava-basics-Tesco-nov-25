@@ -230,9 +230,135 @@ public class CustomerMain {
         System.out.println("Amount :" + customer.amount);
         System.out.println("Account Type :" + customer.accountType);
 
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								2.outside the class directly - during runtime , using object references
+
+
+public class Employee {
+    int id;
+    String name;
+    double salary;
+}
+
+public class EmployeeMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        System.out.println("Id :" + employee.id);
+        System.out.println("Name :" + employee.name);
+        System.out.println("Salary : " + employee.salary);
+    }
+}
+output:
+Id :0
+Name :null
+Salary : 0.0
+
+here you can note down, we have not initialized the values explicitly , but java has given some value which are called "default values"
+
+Default values for instance variable:
+ default values are assigned by java during runtime based on the type of variable
+
+byte,int,long,short - 0
+float,double =0.0
+char = some unicode char
+boolean =false
+
+Reference Types:
+ Any reference type default value would be  "null"
+
+
+public class EmployeeMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+
+        employee.id=10;
+        employee.name="Subramnaian Murugan";
+        employee.salary=2000;
+        employee.gender='M';
+        employee.isActive=true;
+
+        System.out.println("Id :" + employee.id);
+        System.out.println("Name :" + employee.name);
+        System.out.println("Salary : " + employee.salary);
+        System.out.println("Gender : " + employee.gender);
+        System.out.println("Status : " + employee.isActive);
 
     }
 }
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 methods(behavior) 
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+What is method?
+	A method is a block of code inside class that performs an action.
+eg:
+startEngine(),depositMoney(),getMarks(),calculateSalary()
+
+Syntax:
+ accessModifier   returnType methodName(args){
+    //code to be executed
+ }
+public class Car {
+    //state
+    String name;
+    int speed;
+
+    //behaviour //methods
+    void start() {
+        System.out.println(name + " Started");
+    }
+
+    void acclerate(int increment) {
+        speed += increment;
+        System.out.println("Speed is now : " + speed);
+    }
+
+    void stop() {
+        speed = 0;
+        System.out.println(name + " Stopped");
+    }
+}
+public class CarMain {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.name = "BMW";
+        car.start();
+        //4 parameter
+        car.acclerate(4);
+        car.acclerate(4);
+
+        car.stop();
+
+    }
+}
+
+Lab:
+1.Employee Salary Calculation
+Attributes/state: id,name,basicSalary
+methods:
+  calculateHRA() -> 20% Of basic
+  calculatePF() -> 10% OF Basic
+  calculateNetSalary =  basic+ HRA-PF
+  displaySalary
+
+2.Temperature Converter
+celsiusToFahrenheit  - double c
+ fahrenheitToCelsisus - double f
+
+F =  C * 9/5 + 32
+C=(F-32) * 5/9
+
+3.Electricity Bill Generator
+ attributes: consumerName, units
+methods: calculateBill
+
+Rules:
+ First 100 unit = 5 /unit
+ Next 100 units = 7 / unit
+Above 200 units = 10 / unit
+
 
 
 
