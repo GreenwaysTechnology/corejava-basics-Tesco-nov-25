@@ -788,7 +788,7 @@ public class HRMain {
 
     }
 }
-here you cant access id why? will discuss
+here you cant access id why? because default scope
 
 
 package com.tesco.hr;
@@ -800,18 +800,256 @@ public class EmployeeAppMain {
     }
 }
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										Hierarchy
+
+									Order of Abstractions
+
+ "Objects and classes  should be organized into hierarchies to manage complexity using abstraction, generalization, and decomposition"
+
+Types of Hierarchies:
+....................................
+
+1.class Hierarchy / IS-A Hierarchy:
+	This hierarchy is built using "generalization/specialization".
+How to implement?
+	 In programming languages, class hierarchies are called as "inheritance"
+characteristics:
+1.parent and child relationships
+2.Reuse attributes and Behaviours
+3.Polymorphism
+
+2.Object Hierarchy (Aggregation/Composition)
+   This hierarchy shows whole-part relationships (HAS-a relationship)
+  Object has another Object
+	eg:
+	Car has Engine
+class vs object hierarchy:
+	class is compile time hierarchy where as object is runtime hierarchy
+		"The relationship between classes are decided during compile time and object relationship is decided during runtime"
+
+3.Module Hierarchy
+		Grouping related classes into single unit - packages/components
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										Class Hierarchy implementation - inheritance
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Why inheritance?
+	code reuse or avoid code duplication
+
+Java and inheritance implementation:
+
+1.concrete class inheritance
+2.interface based inheritance
+3.abstract class based inheritance
 
 
+1.concrete class inheritance:
+
+ how to share code between or among classes 
+
+eg:
+ Car
+ Bike
+ Truck
+
+common properties in all Vehicle
+ brand
+ speed
+
+Without Inheritance, how the state /variables are duplicated:
+package com.tesco.inheritance;
+
+public class Car {
+    private String brand;
+    private int speed;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+}
+package com.tesco.inheritance;
+
+public class Truck {
+    private String brand;
+    private int speed;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+}
+
+package com.tesco.inheritance;
+
+public class Bike {
+    private String brand;
+    private int speed;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+}
+
+Here you can notice , variables are duplicated.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									 Inheritance and code Reuse
+
+You can create common class, have common properties which can be connected with classes where you want to share properties.
 
 
+package com.tesco.inheritance;
 
+//car class now connected with vehicle class
+//all vechile properties are shared to car, so cant need not declare properties again
+//car is child class and where as Vehicle is parent class
+public class Car extends Vehicle {
+    
+}
 
+eg:
+package com.tesco.inheritance;
 
+public class Vehicle {
+    private String brand;
+    private int speed;
 
+    public String getBrand() {
+        return brand;
+    }
 
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
+    public int getSpeed() {
+        return speed;
+    }
 
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+}
+package com.tesco.inheritance;
 
+//car class now connected with vehicle class
+//all vechile properties are shared to car, so cant need not declare properties again
+//car is child class and where as Vehicle is parent class
+public class Car extends Vehicle {
+    private int doors;
+
+    public int getDoors() {
+        return doors;
+    }
+
+    public void setDoors(int doors) {
+        this.doors = doors;
+    }
+}
+package com.tesco.inheritance;
+
+public class Truck extends Vehicle {
+     private int loadCapacity;
+
+    public int getLoadCapacity() {
+        return loadCapacity;
+    }
+
+    public void setLoadCapacity(int loadCapacity) {
+        this.loadCapacity = loadCapacity;
+    }
+}
+package com.tesco.inheritance;
+
+public class Bike extends Vehicle {
+
+}
+package com.tesco.inheritance;
+
+public class VehicleMain {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.setBrand("BMW");
+        car.setSpeed(33);
+        car.setDoors(4);
+        System.out.println(car.getBrand());
+        System.out.println(car.getSpeed());
+        System.out.println(car.getDoors());
+
+        //Truck
+        Truck truck = new Truck();
+        truck.setBrand("Tata");
+        truck.setSpeed(180);
+        truck.setLoadCapacity(5000);
+        System.out.println(truck.getBrand());
+        System.out.println(truck.getSpeed());
+        System.out.println(truck.getLoadCapacity());
+
+        //Bike
+        Bike bike = new Bike();
+        bike.setBrand("Hero Honda");
+        bike.setSpeed(140);
+        System.out.println(bike.getBrand());
+        System.out.println(bike.getSpeed());
+
+    }
+}
+
+Lab:
+1. Employee Payroll system
+	
+Types of employee:
+	1.Contract Employee
+	2.Perment Employee
+	3.Wage Employee
+	4.PartTime Employee
+	5.FullTime Employee
+You have to identify the common properties among all employees and specific properties in each employee
+	Design class hierarchy.
+
+2.Banking system
+	Types of account 
+	Savings Account
+	Current Account
+	Loan Account
+	Demat Account
+You have to identify the common properties among all accounts and specific properties in each Account
+	Design class hierarchy.
 
 
 
