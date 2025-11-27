@@ -1118,15 +1118,459 @@ public class PartofMain {
 }
 
 Aggregation -has-a
+package com.tesco.oo.hasa;
 
+public class Employee {
+    private String id;
+    private String name;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+package com.tesco.oo.hasa;
+
+public class Department {
+    private String name;
+    //hasa Employee
+    private Employee employee;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+}
+package com.tesco.oo.hasa;
+
+public class HasaMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        employee.setId("1");
+        employee.setName("Subramanian");
+
+        Department department = new Department();
+        department.setName("Development");
+        //binding
+        department.setEmployee(employee);
+
+        System.out.println(department.getName() + " => " + department.getEmployee().getName());
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									  	   Typing
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+		"Typing is the enforcement of the class of an object, restricting the kinds of operations that can be applied to it"
+
+Types of Typing
+
+1.Strong typing
+	without data type you cant declare any variable
+2.Weak typing
+	without data type you can declare variables
+
+Java is strongly typed programming language, so the type of variable must be specified.
+
+What if i apply different type?
+
+1.You may get compile time error.
+
+Type conversion:
+
+ Type conversion = changing one data type to another datatype
+
+Java supports two types of conversion
+
+1.implicit conversion / automatic conversion
+2.Explicit conversion / Narrowing conversion
+
+1.implicit conversion / automatic conversion
+	conversion is taken care by compiler, you dont need to do any conversion manually.
+
+ From smaller data type to larger date type is possible.
+
+byte,short,long,int
+float and double
+
+package com.tesco.oo.typeconversion.implicitconversion;
+
+public class AutoMaticConversion {
+    public static void main(String[] args) {
+        byte b = 10;
+        //byte is converted into short auotmatically
+        short s = b;
+        System.out.println("B" + b + "S:" + s);
+        int i = b;
+
+        //here you get compiltime error; why because 10.5 its type is double by default
+        //  float f = 10.5;
+        double d = 10.5;
+        //        long a = d;
+    }
+}
+
+Explicit conversion / Narrowing conversion
+	 if you try to convert big to small, you will get compile time error, what if i want that conversions
+  you can explicitly convert type.
+     when you convert, there is possibility of data loss
+
+        int i = 10;
+        short s = i;
+ here the conversion not possible
+
+syntax
+   type variable = (type) variabletobeConverted
+
+package com.tesco.oo.typeconversion.explicitconversion;
+
+public class ExplicitConversion {
+    public static void main(String[] args) {
+        int i = 10;
+        short s = (short) i;
+        System.out.println("I" + i + " S " + s);
+
+        float price = (float) 10.5;
+        //short cut for float conversion
+        float totalPrice = 10.5f;
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&										Reference variable conversion
+
+
+ Employee e = new Employee();
+   |               |
+Type     reference variable      - type of reference variable is Employee
+
+
+class Account {}
+
+class SavingsAccount extends Account {}
+
+SavingsAccount sb = new SavingsAccount() 
+	
+			the type  of "sb"  is SavingsAccount
+
+Program to Super Type:
+........................................
+Account sb = new SavingsAccount() 
+	 The type of sb can be "Super Type"
+
+package com.tesco.oo.typing.referencetype;
+
+public class Account {
+}
+package com.tesco.oo.typing.referencetype;
+
+public class SavingsAccount extends  Account{
+}
+package com.tesco.oo.typing.referencetype;
+
+public class ReferenceType {
+    public static void main(String[] args) {
+        //Program to sub Type
+        SavingsAccount sb = new SavingsAccount();
+        //Program to super Type
+        Account account = new SavingsAccount();
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+											Polymorphism
+
+Polymorphism is the implementation of "Typing" theory.
+
+Polymorphism means many forms.
+
+In java 
+		 	"One Object behaving in multiple ways using a single interface or reference"
+
+Types of Polymorphism:
+
+1.Compile time Polymorphism
+2.Runtime polymorphism.
+
+1.Compile time Polymorphism
+	It is compile time decision for the reference variable of method binding.
+
+class A{
+	add
+}
+
+A a = new A()
+a.add() - compiler is very clear what to do
+
+A class can have similar  more methods  - overloading
+
+overloading:
+1.Different number of parameters
+2.Different type of parameters
+
+What you can overload?
+1.methods
+2.constructors
+
+package com.tesco.oo.polymorphism.overloading;
+
+public class Calculator {
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    int add(double a, int i, float b) {
+        return (int) (a + i + b);
+    }
+}
+package com.tesco.oo.polymorphism.overloading;
+
+public class CalculatorMain {
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        System.out.println(calculator.add(19, 2));
+        System.out.println(calculator.add(19, 2,89));
+        System.out.println(calculator.add(12.8, 2,9.0f));
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										constructors and overloading
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+constructors are special methods used to initialize the state
+
+state:
+ with in class directly  -during object creation
+ outside class using setters - after object creation
+ using constructors - during object creation.
+
+constructor syntax:
+  
+public class Customer{
+	
+	public | private | no keyword Customer(){} -  default constructor - no arg constructor
+	public | private | no keyword Customer(int id,String name){} -  two arg constructor - overloaded
+
+
+}
+package com.tesco.oo.polymorphism.overloading;
+
+public class Customer {
+    private int id;
+    private String name;
+    private String city;
+    private double creditLimit;
+
+    //constructors
+    public Customer(){
+
+    }
+    public Customer(int id, String name, String city, double creditLimit) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+        this.creditLimit = creditLimit;
+    }
+
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Customer(int id, String name, String city) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+    }
+
+    public Customer(String name, double creditLimit) {
+        this.name = name;
+        this.creditLimit = creditLimit;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public double getCreditLimit() {
+        return creditLimit;
+    }
+
+    public void setCreditLimit(double creditLimit) {
+        this.creditLimit = creditLimit;
+    }
+}
+package com.tesco.oo.polymorphism.overloading;
+
+public class ConstructorOverloading {
+    public static void main(String[] args) {
+        Customer customer1 = new Customer();
+        Customer customer2 = new Customer(1, "Test");
+        Customer customer3 = new Customer(1, "Test", "City");
+        Customer customer4 = new Customer(1, "test", "city", 45);
+
+
+        System.out.println(customer3.getCity() + customer3.getName());
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									Runtime Polymorphism  - Method overriding
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+How to re use methods across the inheritance family?
+	
+Parent class has one method
+the same can be overridden in derived class with different implementation
+
+Rules:
+ 1.method name,return type,arg type must be same
+  2.access modifier may different
+
+
+package com.tesco.oo.runtimepoly.overriding;
+
+public class Animal {
+    public void eat(){
+        System.out.println("Animal eats");
+    }
+}
+package com.tesco.oo.runtimepoly.overriding;
+
+public class Dog extends Animal {
+	
+}
+
+public class OverdingSimple {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat();
+    }
+}
+how this works, because during compile time, the compiler copies the base class code into derived class
+
+Animal.class
+public class Animal {
+    public void eat(){
+        System.out.println("Animal eats");
+    }
+}
+package com.tesco.oo.runtimepoly.overriding;
+
+Dog.class
+public class Dog extends Animal {
+     public void eat(){
+	   super.eat()        
+     }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+What if i write my own /my version of eat method?
+package com.tesco.oo.runtimepoly.overriding;
+
+public class Dog extends Animal {
+    @Override
+    public void eat() {
+        super.eat();
+    }
+}
+
+ourversion:
+package com.tesco.oo.runtimepoly.overriding;
+
+public class Dog extends Animal {
+    @Override
+    public void eat() {
+        System.out.println("Dog eats!");
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								Program to Super Type and overriding , Reference Conversion
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+ Animal animal = new Dog();
+ animal.eat();
+
+What would be the output?
+Dog eats!
+How?
+
+ Animal animal = new Dog();
+ animal.eat();
+  
+In this code, eat method is mapped/verified against "type" during compile time.
+	here type is Animal, 
+		eat method is declared 
+
+During runtime , the runtime always looks the object implementation i mean right of the code
+
+						   "During compile time, left side, during runtime right side"
+
+
+  Animal animal = new Dog();
+        animal.eat();
+        //Cannot resolve method 'bark' in 'Animal'
+       // animal.bark();
+
+		here bark is not available in the "Animal" Type, so we cant call bark method using "Animal" Type, what if i want to call 
+							  				Solution is
+									 "Reference type Conversion"
+
+Reference type conversion is other wise called as "down casting"
+
+Synatx:
+		SubType variable = (SubType) variableOfSuperType
+   		
+	 Dog tmpDog = (Dog) animal;
+        tmpDog.bark();
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-									     Typing
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
-
-
-
+										Static variables and methods
 
 
 
