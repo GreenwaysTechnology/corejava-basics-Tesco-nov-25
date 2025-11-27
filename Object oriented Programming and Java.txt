@@ -380,7 +380,7 @@ How to organize /modularize the code?
 		packages
 
 What is package ?
-  package is a folder-like structure used to group related classes, interfaces, and subpackages
+  package is a folder-like structure used to group related classes, interfaces, and sub packages
 
 Packages help to :
 organize the code
@@ -801,7 +801,6 @@ public class EmployeeAppMain {
 }
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 										Hierarchy
-
 									Order of Abstractions
 
  "Objects and classes  should be organized into hierarchies to manage complexity using abstraction, generalization, and decomposition"
@@ -1050,6 +1049,85 @@ You have to identify the common properties among all employees and specific prop
 	Demat Account
 You have to identify the common properties among all accounts and specific properties in each Account
 	Design class hierarchy.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								.Object Hierarchy (Aggregation/Composition)
+
+Object hierarchy is nothing but how objects are connected during runtime.
+Has-a relationship:
+ 	Aggregation represents a "has-a" relationship where the contained objects can exist independently of the container Object.
+				 	eg: A Library has Books, but books can exits outside of the Library
+		Composition is a stronger "part-of" relationship where the contained objects cant exists without the container.
+					eg: A Car has an Engine, if the Car is destroyed , the Engine also destroyed
+
+
+Composition : Part of Relationship eg:
+
+package com.tesco.oo.partof;
+
+public class Engine {
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+}
+package com.tesco.oo.partof;
+
+public class Car {
+    private  String model;
+    //part of relationship
+    private Engine engine;
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+}
+package com.tesco.oo.partof;
+
+
+public class PartofMain {
+    public static void main(String[] args) {
+        Engine engine = new Engine();
+        engine.setType("BMW Engine");
+        Car car = new Car();
+        car.setModel("BMW X");
+        //binding the object /connecting objects during runtime
+        car.setEngine(engine);
+
+        //car details
+        System.out.println(car.getModel());
+        System.out.println(car.getEngine().getType());
+
+    }
+}
+
+Aggregation -has-a
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									     Typing
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+
+
 
 
 
