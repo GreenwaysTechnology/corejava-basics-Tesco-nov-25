@@ -1566,13 +1566,467 @@ Reference type conversion is other wise called as "down casting"
 Synatx:
 		SubType variable = (SubType) variableOfSuperType
    		
-	 Dog tmpDog = (Dog) animal;
-        tmpDog.bark();
+	        Dog tmpDog = (Dog) animal;
+                tmpDog.bark();
 
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 										Static variables and methods
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+A static variable  are variables which are called with help of class name.
+
+1.Belongs to the class,Not to Objects
+2.is shared among all objects
+3.created only once in memory
+4.Loaded when the class is loaded 
 
 
+package com.tesco.oo.staticvariables;
 
+public class Utility {
+    public static String COMPANY_NAME = "Tesco";
+
+    public static void getInfo() {
+        System.out.println("Info");
+    }
+}
+package com.tesco.oo.staticvariables;
+
+public class StaticMain {
+    public static void main(String[] args) {
+        System.out.println(Utility.COMPANY_NAME);
+        Utility.getInfo();
+    }
+}
+
+Why main method is marked static?
+  public static void main(String[] args) {
+        System.out.println(Utility.COMPANY_NAME);
+        Utility.getInfo();
+    }
+java runtime supplies entry class , that class will call main method directly.
+
+JVMEntry
+	 call main method
+		StaticMain.main()
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 final  - constants
+
+if you want declare constant,you can use final
+	int a =10;
+	 a=30 // reinitialized variable
+	
+	what if i don't want to reinitialize  the a only one time i have initialize
+	final variables
+
+    final float PI = 3.14f;
+        System.out.println(PI);
+        PI =90.99f;
+************************************************************************************************************************************************************
+								 static variables and final
+
+as per coding standard , static variables must be marked final, so those variables will not be reinitialized 
+package com.tesco.oo.staticvariables;
+
+public class Utility {
+    public  static final String COMPANY_NAME = "Tesco";
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								methods and final keyword
+
+if any method is marked final, cant be overridden
+package com.tesco.oo.finalkeyword;
+
+public class Account {
+    public final String getName(){
+        return  "Subramnaian";
+    }
+}
+package com.tesco.oo.finalkeyword;
+
+public class SavingsAccount extends Account {
+    @Override
+    public String getName() {
+        return "Subramanian Murugan";
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+											Java in built classes and packages
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Package java.lang
+
+Provides classes that are fundamental to the design of the Java programming language. 
+The most important classes are Object, which is the root of the class hierarchy, and Class, instances of which represent classes at run time.
+
+class A {}
+
+ Does A has Parent class?
+   no parent 
+
+class B {}
+
+class C extends B {}
+
+ Does C has Parent class?
+   Yes ,there is  parent class called "B"
+
+
+class A {}
+
+ Does A has Parent class?
+   yes, according to java, every "java class has parent" -  java.lang.Object
+
+public class Object{}
+
+public class A extends Object {
+
+}
+
+Methods of Object class , will be available automatically into all java classes.
+
+Class Object is the root of the class hierarchy. Every class has Object as a superclass. All objects, including arrays, implement the methods of this class.
+
+common methods of java.lang.Object:
+................................................................
+
+1.toString
+package com.tesco.oo.lang.object;
+
+public class Greeter {
+    public String sayHello() {
+        return "Hello";
+    }
+}
+package com.tesco.oo.lang.object;
+
+public class LangMain {
+    public static void main(String[] args) {
+        Greeter greeter = new Greeter();
+        System.out.println(greeter.sayHello());
+        System.out.println(greeter.toString());
+    }
+}
+Now toString implementation of object class is invoked
+com.tesco.oo.lang.object.Greeter@1b28cdfa
+
+Can i override toString and give meaning full implementation
+
+Yes
+package com.tesco.oo.lang.object;
+
+public class Greeter {
+    public String sayHello() {
+        return "Hello";
+    }
+
+    @Override
+    public String toString() {
+        return "Greeter Class";
+    }
+}
+output:
+Hello
+Greeter Class
+package com.tesco.oo.lang.object;
+
+public class LangMain {
+    public static void main(String[] args) {
+        Greeter greeter = new Greeter();
+        System.out.println(greeter.sayHello());
+        System.out.println(greeter.toString());
+
+        //Program to Super type
+        Object hello = new Greeter();
+        System.out.println(hello.toString());
+        Greeter tmpGreeter = (Greeter) hello;
+        System.out.println(tmpGreeter.sayHello());
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										hashCode
+
+hashcode is unique number generated by jvm to identify each objects uniquely inside jvm.
+
+
+public class HashCodeMain {
+    public static void main(String[] args) {
+        Greeter greeter = new Greeter();
+        System.out.println(greeter.hashCode());
+    }
+}
+
+overriding hash code:
+....................................
+package com.tesco.oo.lang.object;
+
+public class Greeter {
+    public String sayHello() {
+        return "Hello";
+    }
+
+    @Override
+    public String toString() {
+        return "Greeter Class";
+    }
+
+    @Override
+    public int hashCode() {
+        return 34343434 * 34;
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 class Object
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Source code 
+Hello.java
+
+public class Hello {}
+
+Compilation - Hello.class-------load into jvm------>JVM prepares the "class Object from the Hello.class" (meta object)-------->Hello instance created.
+package com.tesco.oo.lang.object;
+
+public class ClassObject {
+    public static void main(String[] args) {
+        Greeter greeter = new Greeter();
+        System.out.println(greeter.getClass().getName());
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									Wrapper classes
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+java has primitive data types like byte,short,int,float,double,char....
+
+What if i want the same primitive types as objects -  Wrapper classes .........
+
+Wrapper classes are object representation of primitive, which is part of the  "java.lang" package
+
+
+byte --------java.lang.Byte
+short ------java.lang.Short
+int --------java.lang.Integer
+long------java.lang.Long
+float -----java.lang.Float
+double -- java.lang.Double
+char ----java.lang.Char
+boolean -java.lang.Boolean...
+
+package com.tesco.oo.lang.object.wrapperclasses;
+
+public class WrapperDemos {
+    public static void main(String[] args) {
+//        Integer i = new Integer(100);
+        //i is reference variable, Integer is Reference type
+        //100 is primitve value, how this 100 is converted into Wrapper
+        //Boxing
+        Integer i = 100;
+        System.out.println(i.longValue());
+
+        Integer a = 100;
+        //Reference to Primitive: Unboxing
+        int b = a;
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										Strings
+
+Strings are object - java.lang.String
+
+String object has lot of methods for string processing.		
+		
+package com.tesco.oo.lang.object.wrapperclasses;
+
+public class StringDemo {
+    public static void main(String[] args) {
+        String str = "Hello";
+        System.out.println(str.toLowerCase());
+        System.out.println(str.toUpperCase());
+        System.out.println(str.chars().max().getAsInt());
+
+        //how to equals two strings
+        String name = "Subramnaian";
+        String anotherName = "Subramanian";
+        if (name == anotherName) {
+            System.out.println("two Strings are equal");
+        } else {
+            System.out.println("two Strings are equal");
+        }
+        if (name.equalsIgnoreCase(anotherName)) {
+            System.out.println("two Strings are equal");
+        } else {
+            System.out.println("two Strings are equal");
+        }
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									java.lang.Object - equals methods
+************************************************************************************************************************************************************
+Comparing objects for equality 
+
+int a  =10
+int b = 10
+boolean b = a ==b
+ result is true
+
+package com.tesco.oo.lang.object.referenceequals;
+
+public class Employee {
+    private int id;
+    private String name;
+
+    public Employee() {
+    }
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+package com.tesco.oo.lang.object.referenceequals;
+
+public class EmployeeEqualsMain {
+    public static void main(String[] args) {
+        Employee empOne = new Employee(1, "Subramanian");
+        Employee empTwo = new Employee(1, "Subramanian");
+        //equal operator
+        if (empOne == empTwo) {
+            System.out.println("Employees are equal");
+        } else {
+            System.out.println("Employees are not equal");
+        }
+    }
+}
+
+Result:
+Employees are not equal
+
+	Why: Our Objective or observation that two employee objects having same data, but actually equal to operator is not giving right result
+
+equal  to operator:
+				never compares the data of objects rather it compares memory location of those objects
+
+package com.tesco.oo.lang.object.referenceequals;
+
+public class EmployeeEqualsMain {
+    public static void main(String[] args) {
+        Employee empOne = new Employee(1, "Subramanian");
+        Employee empTwo = new Employee(1, "Subramanian");
+        //equal operator
+//        if (empOne == empTwo) {
+//            System.out.println("Employees are equal");
+//        } else {
+//            System.out.println("Employees are not equal");
+//        }
+        //
+        Employee empThree = empOne;
+
+        if (empOne == empThree) {
+            System.out.println("Employees are equal");
+        } else {
+            System.out.println("Employees are not equal");
+        }
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										How to compare the content of Objects
+
+equals method of java.lang.Object
+
+
+  if (empOne.equals(empTwo)) {
+            System.out.println("Employees are equal");
+        } else {
+            System.out.println("Employees are not equal");
+        }
+Employees are not equal 
+   	because java.lang.equals method always returns false, because they dont know on what basis the objects are compared
+
+package com.tesco.oo.lang.object.referenceequals;
+
+public class Employee {
+    private int id;
+    private String name;
+
+    public Employee() {
+    }
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Employee tmpEmp = (Employee) obj;
+        return tmpEmp.getId() == this.getId();
+    }
+}
+package com.tesco.oo.lang.object.referenceequals;
+
+public class EmployeeEqualsMain {
+    public static void main(String[] args) {
+        Employee empOne = new Employee(1, "Subramanian");
+        Employee empTwo = new Employee(2, "Subramanian");
+        //equal operator
+//        if (empOne == empTwo) {
+//            System.out.println("Employees are equal");
+//        } else {
+//            System.out.println("Employees are not equal");
+//        }
+        //
+//        Employee empThree = empOne;
+//
+//        if (empOne == empThree) {
+//            System.out.println("Employees are equal");
+//        } else {
+//            System.out.println("Employees are not equal");
+//        }
+
+        if (empOne.equals(empTwo)) {
+            System.out.println("Employees are equal");
+        } else {
+            System.out.println("Employees are not equal");
+        }
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+					Basic Data Structures ,Exception Handling intro, IO operations, Spring Boot Framework introduction
 
 
