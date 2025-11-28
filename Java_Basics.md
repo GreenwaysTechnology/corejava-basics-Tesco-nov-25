@@ -1113,7 +1113,6 @@ eg:
   stop the loop.
  if more than 3 attempts, you have to print Message "Card Blocked"
 
-Solution : To get input
 
 2.Restaurant Billing System -  Sum of orders
     Add price of each item until customer enters 0

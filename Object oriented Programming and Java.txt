@@ -2170,7 +2170,7 @@ public class TwoDimensionalArray {
                 {86, 89, 90}, //student 1 =i
                 {56, 89, 90}, // student 2=i
                 {99, 97, 98},  // student 3=i
-                {89, 90, 90}
+                {89, 90, 90}  // student 4=
         };
         //inner loop takes care of marks //columns
         //outer loop takes care of students // row
@@ -2193,14 +2193,368 @@ public class TwoDimensionalArray {
     }
 }
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+							               		Exception Handling
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Exception handling is a mechanism in java to handle runtime errors so that the program does not crash.
+
+Types of errors:
+1.compile time error
+	it comes due to program syntax error.
+	it can be fixed during development
+2.runtime error
+     it comes during app the execution, we cant predicate when this error will come.
+     what if the runtime error occurs?
+		The app gets crashed.
+
+Can we handle smoothly without app crash?
+  Yes! - Exception handling - if something goes wrong, we can handle it very smoothly.
+
+Java and runtime error handling:
+  java handles runtime error using keywords -  try,catch,finally,throw,throws
+
+Advantages of Exception Handling:
+1.Program can continue even though runtime error occurred
+2.Errors are handled safely
+3.User friendly error messages
+
+Category of Exceptions in java:
+....................................................
+
+1.Checked Exceptions (Compile time)
+2.UnChecked Exceptions (Runtime Exceptions)
+3.Errors (cant be handled by the developer in the code)
+
+	If java language forces you to have exception related code , that kind of Exceptions are called "Checked Exceptions"
+	If java language does not you have  exception related code , that kind of Exceptions are called "Unchecked Exceptions"
+
+"Checked Exceptions" 
+			When write some code , if language or you decide that this code may cause runtime error, then you have to safety block.
+
+"Unchecked Exceptions"
+			When write some code , if language or you decide that this code may cause runtime error, still you can skip safety block code
+
+
+lets start with example
+
+package com.tesco.exception;
+
+import java.util.Scanner;
+
+public class ExceptionOne {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int i = 10;
+        System.out.println("Enter  value: ");
+        int value = sc.nextInt();
+        int j = i / value;
+        System.out.println("J :" + j);
+    }
+}
+
+output:
+Enter  value: 
+0
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at com.tesco.exception.ExceptionOne.main(ExceptionOne.java:11)
+
+The above one is exception  -  runtime error - div by 0... 
+     
+In the source code , we have not used any keywords to handle exception, system handles that exceptions prints the message...
+									UnChecked Exception
+
+Common Unchecked Exceptions:
+java.lang.ArithmeticException
+java.lang.NullPointerException
+etc...
+ 										Exception class Hierarchy
+
+java provides three category of Exceptions
+1.checked
+2.unchecked 
+3.error
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+											  java.lang.Object
+						--------------------------------------------------------------------------------------------------------
+												 |
+											java.lang.Throwable -The Throwable class is the superclass of all errors and exceptions 													|		     in the Java language
+													|
+				--------------------------------------------------------------------------------------------------------------------------------
+				Exception                                                                                                                                       Error
+																An Error is a subclass of Throwable that indicates serious 					 |												problems that a reasonable application should not try to catch					 |
+The class Exception and its subclasses are a form of Throwable that indicates conditions 
+	that a reasonable application might want to catch.
+				 |
+	-----------------------------------------------------------------------------------------------------------
+	|																    |
+(Checked)                                                                                                         	(Unchecked)
+The class Exception and any subclasses that are not also subclasses 		The class java.lang.RuntimeException and its child classes
+of RuntimeException are checked exceptions							are called unchecked Exceptions
+	
+Handling Unchecked Exception without using any keyword, so compiler is not going to complain 
+
+package com.tesco.exception;
+
+public class ArrayStoreExceptionDemo {
+    public static void main(String[] args) {
+        Object x[] = new String[3];
+        x[0] = 10;
+    }
+}
+This code gives error in runtime.
+Exception in thread "main" java.lang.ArrayStoreException: java.lang.Integer
+	at com.tesco.exception.ArrayStoreExceptionDemo.main(ArrayStoreExceptionDemo.java:6)
 
 
 
+package com.tesco.exception;
 
+public class ClassCastExceptionDemo {
+    public static void main(String[] args) {
+        Object o = 10; //new Integer(10)
+        System.out.println((String) o);
+    }
+}
+output:
+Exception in thread "main" java.lang.ClassCastException: class java.lang.Integer cannot be cast to class java.lang.String (java.lang.Integer and java.lang.String are in module java.base of loader 'bootstrap')
+	at com.tesco.exception.ClassCastExceptionDemo.main(ClassCastExceptionDemo.java:6)
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								 Can you use (handle) unchecked exceptions via keywords
 
+try{
+  //risky code, this code may cause runtime error at any time
+}
+catch(ExceptionName e){
+  if something goes wrong how to report this.
+}
 
+				Yes you can handle unchecked Exceptions via try...catch but it is completely optional
+						Note: Most of the time we never use try...catch for unchecked exceptions
 
+package com.tesco.exception;
 
+public class ClassCastExceptionDemo {
+    public static void main(String[] args) {
+//        Object o = 10; //new Integer(10)
+//        System.out.println((String) o);
+        try {
+            Object o = 10; //new Integer(10)
+            System.out.println((String) o);
+        } catch (ClassCastException e) {
+            //print exception message
+            //System.out.println(e.getMessage());
+            //e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
+        }
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 null value and NullPointerException
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+what is null?
+	null is value which indicates that object reference variable has no "valid object memory location", reference variable still not pointing to object.
+			String str=null;
+			Employee emp=null;
+
+package com.tesco.exception;
+
+public class NullValuesAndExceptions {
+    public static void main(String[] args) {
+        String str = null;
+        System.out.println(str);
+//        System.out.println(str.toUpperCase());
+        Employee emp = null;
+        System.out.println(emp.getId());
+    }
+
+Checked Exceptions to be discussed in next chapter
+
+"throws and throw" keywords to be discussed later
+"custom Exceptions" to be discussed later
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 IO Programming in java 
+									 	File IO Handling - java.io
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+java io = reading and writing data such as
+Text
+Files
+Binary data
+Keyboard input
+Network streams
+					java handles data transfer from one place to another (input and output) using Streams
+
+Streams:
+    				data is transferred    "byte-by-byte"  or "character by character"
+A stream is a flow of data.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									 Java Streams  Category
+
+1.Byte stream ( uses 8-bit data)
+	Used for binary transfer
+2.Character Stream (16-bit  Unicode data)
+      Used for Text data.
+
+Input and output - Byte Stream:
+.....................................................
+												java.io.InputStream -  the superclass of all classes representing an input stream of 														|	     bytes.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|					|					|
+FileInputStream    ByteArrayInputStream   ObjectInputStream etc..............
+
+Based on the data source, stream classes been designed......
+
+Data sources
+1.File
+2.ByteArray
+3.Objects
+4.Audio
+etc....
+
+package com.tesco.io;
+
+import java.io.ByteArrayInputStream;
+
+public class ByteArrayInputStreamDemo {
+    public static void main(String[] args) {
+        //byte array as input source
+        byte[] data = "Hello Java io".getBytes();
+        //read data from the byte array
+        ByteArrayInputStream input = new ByteArrayInputStream(data);
+        //read data from the bytearray input stream
+        int byteValue;
+        while ((byteValue = input.read()) != -1) {
+            System.out.print((char)byteValue);
+        }
+        //input.close();
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+							Checked Exception and IO 
+
+package com.tesco.io;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+public class ByteArrayInputStreamDemo {
+    public static void main(String[] args) {
+        //byte array as input source
+        byte[] data = "Hello Java io".getBytes();
+        //read data from the byte array
+        ByteArrayInputStream input = new ByteArrayInputStream(data);
+        //read data from the bytearray input stream
+        int byteValue;
+        while ((byteValue = input.read()) != -1) {
+            System.out.print((char) byteValue);
+        }
+        //close method is throwing checked Excetion (java.io.IOException)
+        try {
+            input.close();
+        } catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
+        }
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+							   Should i use always try...catch for handling Checked Exception
+
+Not necessary, you can even skip , but you have to throw that exception on which method you are calling
+
+			 public void  anyMethod() throws IOException{
+			       	 Exception code
+			  }
+
+package com.tesco.io;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+public class ByteArrayInputStreamDemo {
+    public static void main(String[] args) throws  IOException {
+        //byte array as input source
+        byte[] data = "Hello Java io".getBytes();
+        //read data from the byte array
+        ByteArrayInputStream input = new ByteArrayInputStream(data);
+        //read data from the bytearray input stream
+        int byteValue;
+        while ((byteValue = input.read()) != -1) {
+            System.out.print((char) byteValue);
+        }
+        //close method is throwing checked Excetion (java.io.IOException)
+//        try {
+//            input.close();
+//        } catch (IOException ioException) {
+//            System.out.println(ioException.getMessage());
+//        }
+        input.close();
+
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									How to read data from disk file
+
+FileInputStream
+		Read data from a file byte-by-byte
+package com.tesco.io;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class FileInputStreamDemo {
+    public static void main(String[] args) {
+
+        String location = "G:/Tesco/ioApp/src/main/resources/config.txt";
+        try {
+            FileInputStream fileInputStream = new FileInputStream(location);
+            int data;
+            while ((data = fileInputStream.read()) != -1) {
+                System.out.print((char) data);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.print(e.getMessage());
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
+        }
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 Spring Framework introduction
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Spring is enterprise java framework for building enterprise grade applications
+
+1.Web application
+2.Microservices
+3.Messaging application
+etc.........
+
+Spring framework solves the problem of object dependencies (has-a or part-of)
+
+class City{}
+class Country{}
+class MailInfo{}
+class Address{
+	City city;
+	Country country;
+	MailInfo mailinfo;
+}
+class Employee{
+	Address address;
+}
+
+City city = new City()
+Country country = new Country()
+MailInfo mailinfo=new MailInfo()
+Address addr=new Address(city,mailInfo,country)
+Employee emp = new Employee(addr)
+
+		To solve this problem the design pattern were proposed "IOC (Inversion of Control) and Dependency Injection"
+
+creating objects and linking objects are taken away from developer, the program(framework) called spring takes care of creating objects and linking objects and make it ready to use.
 
 
 
