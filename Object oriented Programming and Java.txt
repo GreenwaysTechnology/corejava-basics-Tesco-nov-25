@@ -1221,12 +1221,12 @@ package com.tesco.oo.typeconversion.implicitconversion;
 public class AutoMaticConversion {
     public static void main(String[] args) {
         byte b = 10;
-        //byte is converted into short auotmatically
+        //byte is converted into short automatically
         short s = b;
         System.out.println("B" + b + "S:" + s);
         int i = b;
 
-        //here you get compiltime error; why because 10.5 its type is double by default
+        //here you get compile  time error; why because 10.5 its type is double by default
         //  float f = 10.5;
         double d = 10.5;
         //        long a = d;
@@ -1613,7 +1613,7 @@ JVMEntry
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 										 final  - constants
 
-if you want declare constant,you can use final
+if you want declare constant, you can use final
 	int a =10;
 	 a=30 // reinitialized variable
 	
@@ -1651,6 +1651,14 @@ public class SavingsAccount extends Account {
         return "Subramanian Murugan";
     }
 }
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										final and classes
+if you declare class as final, the class cant be extended (inherited)
+
+public final class A{}
+
+public class B  extends A {} - This is compile time error
+
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 											Java in built classes and packages
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -2027,6 +2035,172 @@ public class EmployeeEqualsMain {
     }
 }
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-					Basic Data Structures ,Exception Handling intro, IO operations, Spring Boot Framework introduction
+									Data Structures
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Data structure is way of organizing and storing data so that it can be used efficiently.
+
+Java implementation:
+1.Core Data Structure
+	Arrays, Strings (Collection of characters)
+2.Advanced data structure
+	Collections framework , it is advanced dynamic data structure
+
+
+Array:
+ ->Array is object - which is built in object
+ ->It stores fixed size values
+->It stores same data type
+->The values are stored and processed based on index, index starts 0.
+
+Array can store primitives values and reference valules
+syntax:
+
+1.
+type [] variableName=new type[size]
+
+int[] nums = new int [5];
+
+nums[0]=10
+
+2.
+ type[] variableName = {list of values};
+ int[] nums = {1,2,3,4,5,6}
+ 
+primitive types:
+
+package com.tesco.datastructure.arrays;
+
+public class SimpleArray {
+    public static void main(String[] args) {
+        int[] nums = new int[3];
+        nums[0] = 10;
+        nums[1] = 20;
+        nums[2] = 30;
+        //iterate
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println(nums[i]);
+        }
+        double[] prices = {
+                13.45, 10.9, 45.8, 90.8
+        };
+        for (int i = 0; i < prices.length; i++) {
+            System.out.println(prices[i]);
+        }
+    }
+}
+
+Reference types:
+............................
+package com.tesco.oo.lang.object.referenceequals;
+
+public class Employee {
+    private int id;
+    private String name;
+
+    public Employee() {
+    }
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Employee tmpEmp = (Employee) obj;
+        return tmpEmp.getId() == this.getId();
+    }
+}
+package com.tesco.datastructure.arrays;
+
+
+public class ReferenceTypeArray {
+    public static void main(String[] args) {
+        Employee[] employees = {
+                new Employee(1, "Subramanian"),
+                new Employee(2, "John"),
+                new Employee(3, "James"),
+                new Employee(4, "Patrick")
+        };
+        //traditional for loop
+        for (int i = 0; i < employees.length; i++) {
+            Employee tempEmp = employees[i];
+//            System.out.println(tempEmp.getId() + " " + tempEmp.getName());
+            System.out.println(tempEmp);
+        }
+        //enchanced for loop
+        for (Employee emp : employees) {
+            System.out.println(emp);
+        }
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								 Types of array
+
+1.single dimensional array
+2.multi dimensional array -2d,3d and irregular (jagged arrays)
+
+2 Dimensional array:
+   Stores the values into rows and columns
+
+Store marks of 3 students in 3 subjects
+
+package com.tesco.datastructure.arrays;
+
+public class TwoDimensionalArray {
+    public static void main(String[] args) {
+        int[][] marks = {
+                {86, 89, 90}, //student 1 =i
+                {56, 89, 90}, // student 2=i
+                {99, 97, 98},  // student 3=i
+                {89, 90, 90}
+        };
+        //inner loop takes care of marks //columns
+        //outer loop takes care of students // row
+        //for each student, marks will be printed
+        for (int i = 0; i < marks.length; i++) {
+            System.out.println("Student " + (i + 1) + ":");
+            for (int j = 0; j < marks[i].length; j++) {
+                System.out.println(" " + marks[i][j] + " ");
+            }
+        }
+        int rowNumber = 1;
+        for (int[] row : marks) {
+            System.out.println("Student : " + rowNumber + " :");
+            for (int value : row) {
+                System.out.println(value + " ");
+            }
+            System.out.println();
+            rowNumber++;
+        }
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+
+
+
+
+
+
 
 
