@@ -1,0 +1,129 @@
+											Java Inner Classes
+
+Inner classes are classes defined inside another class. They help logically group classes that are only used in one place or need access to outer class members.
+
+Java provides 4 types of inner classes:
+
+Non-static Inner Class (Member Inner Class)
+Static Nested Class
+Local Inner Class
+Anonymous Inner Class
+
+1️⃣ Member Inner Class (Non-Static)
+✔ Characteristics
+
+Has access to all members of outer class (including private).
+
+Must be created using an outer class instance.
+package org.demo.innerclasses.memberinner;
+
+class Outer {
+    private String message = "Hello from Outer";
+
+    class Inner {
+        void display() {
+            System.out.println("Inner sees: " + message);
+        }
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        Outer.Inner inner = outer.new Inner();
+        inner.display();
+    }
+}
+2️⃣ Static Nested Class
+✔ Characteristics
+
+Declared static.
+
+Cannot access non-static members of outer class.
+
+Created without an outer instance.
+
+package org.demo.innerclasses.staticnested;
+
+class Outer {
+    static String data = "Static Data";
+
+    static class Nested {
+        void show() {
+            System.out.println("Inside static nested class: " + data);
+        }
+    }
+}
+
+public class Demo {
+    public static void main(String[] args) {
+        Outer.Nested obj = new Outer.Nested();
+        obj.show();
+    }
+}
+3️⃣ Local Inner Class (Inside a Method)
+✔ Characteristics
+
+Class declared inside a method.
+
+Can access method’s effectively final variables.
+
+Not visible outside the method.
+
+package org.demo.innerclasses.methodlocal;
+
+class Outer {
+    void process() {
+        int x = 10; // effectively final
+
+        class LocalInner {
+            void print() {
+                System.out.println("Value: " + x);
+            }
+        }
+
+        LocalInner obj = new LocalInner();
+        obj.print();
+    }
+}
+
+public class TestLocal {
+    public static void main(String[] args) {
+        new Outer().process();
+    }
+}
+4️⃣ Anonymous Inner Class
+✔ Characteristics
+
+Class without name.
+
+Used to override methods on the fly.
+
+Commonly used with interfaces, abstract classes
+
+package org.demo.innerclasses.anonymousinner;
+
+interface Greeter {
+    void greet();
+}
+
+public class TestAnon {
+    public static void main(String[] args) {
+
+        Greeter obj = new Greeter() {
+            @Override
+            public void greet() {
+                System.out.println("Hello from Anonymous Inner Class");
+            }
+        };
+
+        obj.greet();
+        Thread t = new Thread() {
+            public void run() {
+                System.out.println("Thread running using anonymous inner class");
+            }
+        };
+
+        t.start();
+    }
+}
