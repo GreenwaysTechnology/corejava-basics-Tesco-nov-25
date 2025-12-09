@@ -1,0 +1,265 @@
+✅ Step 1: Create Custom Exceptions
+InvalidPinException.java (Checked Exception)
+public class InvalidPinException extends Exception {
+    public InvalidPinException(String message) {
+        super(message);
+    }
+}
+
+InsufficientBalanceException.java (Unchecked Exception)
+public class InsufficientBalanceException extends RuntimeException {
+    public InsufficientBalanceException(String message) {
+        super(message);
+    }
+}
+
+✅ Step 2: Create the ATM Class
+ATM.java
+public class ATM {
+    private int pin = 1234;
+    private double balance = 5000.00;
+
+    public void verifyPin(int enteredPin) throws InvalidPinException {
+        if (enteredPin != pin) {
+            throw new InvalidPinException("❌ Invalid PIN entered!");
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("❌ Amount must be greater than zero");
+        }
+        if (amount > balance) {
+            throw new InsufficientBalanceException("❌ Insufficient balance!");
+        }
+        balance -= amount;
+        System.out.println("✅ Withdrawal successful. New balance: " + balance);
+    }
+}
+
+✅ Step 3: Main Class (Test Program)
+ATMLab.java
+import java.util.Scanner;
+
+public class ATMLab {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ATM atm = new ATM();
+
+        try {
+            System.out.print("Enter PIN: ");
+            int pin = sc.nextInt();
+
+            atm.verifyPin(pin);
+
+            System.out.println("✅ Login successful!");
+            System.out.println("Current balance: " + atm.getBalance());
+
+            System.out.print("Enter amount to withdraw: ");
+            double amount = sc.nextDouble();
+
+            atm.withdraw(amount);
+
+        } catch (InvalidPinException e) {
+            System.out.println(e.getMessage());
+
+        } catch (InsufficientBalanceException e) {
+            System.out.println(e.getMessage());
+
+        } catch (Exception e) {
+            System.out.println("❌ System error: " + e.getMessage());
+
+        } finally {
+            System.out.println("🔒 Session ended.");
+            sc.close();
+        }
+    }
+}
+
+
+Lab 2
+✅ Step 1: Interface
+public interface Drivable {
+    void drive();
+}
+
+✅ Step 2: Abstract Class
+public abstract class Vehicle {
+    protected String brand;
+
+    public Vehicle(String brand) {
+        this.brand = brand;
+    }
+
+    public abstract int getMaxSpeed();
+
+    public void showBrand() {
+        System.out.println("🚗 Brand: " + brand);
+    }
+}
+
+✅ Step 3: Concrete Class
+public class Car extends Vehicle implements Drivable {
+
+    public Car(String brand) {
+        super(brand);
+    }
+
+    @Override
+    public int getMaxSpeed() {
+        return 180;
+    }
+
+    @Override
+    public void drive() {
+        System.out.println("✅ Car is driving...");
+    }
+}
+
+✅ Step 4: Test Class
+public class VehicleLab {
+    public static void main(String[] args) {
+
+        Car car = new Car("Toyota");
+        car.showBrand();
+        car.drive();
+        System.out.println("Max Speed: " + car.getMaxSpeed());
+    }
+}
+
+Notification System (Interface-Based Strategy Pattern)
+✅ Scenario
+
+A system that supports Email, SMS and WhatsApp notifications.
+
+✅ Step 1: Interface
+public interface NotificationService {
+    void send(String message);
+}
+
+✅ Step 2: Implementations
+public class EmailNotification implements NotificationService {
+    public void send(String message) {
+        System.out.println("📧 Email sent: " + message);
+    }
+}
+
+public class SMSNotification implements NotificationService {
+    public void send(String message) {
+        System.out.println("📱 SMS sent: " + message);
+    }
+}
+
+public class WhatsAppNotification implements NotificationService {
+    public void send(String message) {
+        System.out.println("💬 WhatsApp message: " + message);
+    }
+}
+
+✅ Step 3: Factory Class (Real-World Pattern)
+public class NotificationFactory {
+
+    public static NotificationService getService(String type) {
+        if(type.equalsIgnoreCase("email")) {
+            return new EmailNotification();
+        } else if(type.equalsIgnoreCase("sms")) {
+            return new SMSNotification();
+        } else if(type.equalsIgnoreCase("whatsapp")) {
+            return new WhatsAppNotification();
+        } else {
+            throw new IllegalArgumentException("Invalid notification type");
+        }
+    }
+}
+
+✅ Step 4: Test Program
+import java.util.Scanner;
+
+public class NotificationLab {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter notification type (email/sms/whatsapp): ");
+        String type = sc.next();
+
+        NotificationService service = NotificationFactory.getService(type);
+        service.send("Your order has been shipped!");
+
+        sc.close();
+    }
+}
+
+Member Inner Class – Bank System
+✅ Scenario
+
+Bank account where inner class handles ATM security.
+
+✅ Code
+public class BankAccount {
+
+    private double balance = 10000;
+
+    // ✅ Member Inner Class
+    class Security {
+        void verifyUser() {
+            System.out.println("🔐 User verified successfully");
+        }
+    }
+
+    public void withdraw(double amount) {
+        Security security = new Security();
+        security.verifyUser();
+
+        if (amount <= balance) {
+            balance -= amount;
+            System.out.println("✅ Withdrawal successful: " + amount);
+        } else {
+            System.out.println("❌ Insufficient balance");
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount();
+        acc.withdraw(2000);
+    }
+}
+
+Real-Time Case Study – Order Processing System
+✅ Scenario
+
+Different inner classes handle payment, shipping and invoice.
+
+public class OrderService {
+
+    public void processOrder() {
+
+        // ✅ Local Inner Class
+        class Payment {
+            void pay() {
+                System.out.println("💳 Payment processed");
+            }
+        }
+
+        // ✅ Member Inner Class
+        class Shipping {
+            void ship() {
+                System.out.println("🚚 Order shipped");
+            }
+        }
+
+        Payment payment = new Payment();
+        Shipping shipping = new Shipping();
+
+        payment.pay();
+        shipping.ship();
+    }
+
+    public static void main(String[] args) {
+        new OrderService().processOrder();
+    }
+}
