@@ -24,7 +24,6 @@ public class RaceDemo {
         t2.start();
         t1.join();
         t2.join();
-        //main thread is existed before other threads started
-        System.out.println("Final Counter :" + counter.counter);
+
     }
 }

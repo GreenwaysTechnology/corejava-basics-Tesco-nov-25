@@ -7,5 +7,7 @@ public class Counter {
     public synchronized void increment() {
         System.out.println(Thread.currentThread().getName());
         counter++;
+        //main thread is existed before other threads started
+        System.out.println("Counter :" + counter);
     }
 }
