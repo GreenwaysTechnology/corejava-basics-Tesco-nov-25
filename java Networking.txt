@@ -1,0 +1,246 @@
+									  Java Networking
+What is Networking?
+
+Networking refers to the process of connecting two or more devices to share data.
+
+Java Networking enables:
+
+Communication between two applications
+File transfer
+Sending/receiving data over sockets
+Working with URLs
+Creating client–server systems
+Working with higher-level protocols (HTTP, FTP, SMTP)
+
+🔶 2. Important Networking Concepts
+| Concept                 | Description                                  |
+| ----------------------- | -------------------------------------------- |
+| **IP Address**          | Unique address to identify a host on network |
+| **Port Number**         | Logical endpoint for communication (0–65535) |
+| **Socket**              | Endpoint of two-way communication            |
+| **TCP**                 | Reliable, connection-based protocol          |
+| **UDP**                 | Fast, connectionless protocol                |
+| **Protocol**            | Rules for communication                      |
+| **Client–Server Model** | Client requests, Server responds             |
+
+
+🔶 3. Java Networking APIs (java.net)
+
+| Class                 | Purpose                 |
+| --------------------- | ----------------------- |
+| **Socket**            | TCP client              |
+| **ServerSocket**      | TCP server              |
+| **DatagramSocket**    | UDP socket              |
+| **DatagramPacket**    | UDP data packet         |
+| **InetAddress**       | Represents IP addresses |
+| **URL**               | Represents a URL        |
+| **URLConnection**     | Connects to a URL       |
+| **HttpURLConnection** | HTTP communication      |
+
+
+package org.example.networking;
+import java.net.*;
+
+public class InetExample {
+    public static void main(String[] args) throws UnknownHostException {
+        InetAddress ip = InetAddress.getByName("www.google.com");
+        System.out.println(ip.getHostName());
+        System.out.println(ip.getHostAddress());
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Server:
+package org.example.networking;
+
+import java.io.*;
+import java.net.*;
+
+public class TCPServer {
+    public static void main(String[] args) throws Exception {
+        ServerSocket ss = new ServerSocket(5000);
+        System.out.println("Server started...");
+
+        Socket s = ss.accept();
+        System.out.println("Client connected!");
+
+        DataInputStream dis = new DataInputStream(s.getInputStream());
+        String msg = dis.readUTF();
+        System.out.println("Client says: " + msg);
+
+        ss.close();
+        s.close();
+    }
+}
+
+Client:
+package org.example.networking;
+
+import java.io.*;
+import java.net.*;
+
+public class TCPClient {
+    public static void main(String[] args) throws Exception {
+        Socket s = new Socket("localhost", 5000);
+
+        DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+        dos.writeUTF("Hello Server!");
+
+        s.close();
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+HttpURLConnection Example:
+
+package org.example.networking;
+
+import java.net.*;
+import java.io.*;
+
+public class HttpExample {
+    public static void main(String[] args) throws Exception {
+        URL url = new URL("https://jsonplaceholder.typicode.com/posts/1");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String line;
+        while ((line = br.readLine()) != null)
+            System.out.println(line);
+
+        con.disconnect();
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+How to build http server
+package org.example.networking;
+
+import java.io.*;
+import java.net.*;
+
+public class HttpServer {
+    public static void main(String[] args) throws Exception {
+        ServerSocket serverSocket = new ServerSocket(8080);
+        System.out.println("🚀 HTTP Server started at http://localhost:8080");
+
+        while (true) {
+            Socket socket = serverSocket.accept();
+            handleClient(socket);
+        }
+    }
+
+    private static void handleClient(Socket socket) {
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            OutputStream out = socket.getOutputStream();
+
+            // Read the request line -> Example: GET / HTTP/1.1
+            String requestLine = in.readLine();
+            System.out.println("Request: " + requestLine);
+
+            if (requestLine == null) {
+                socket.close();
+                return;
+            }
+
+            String[] tokens = requestLine.split(" ");
+            String path = tokens.length > 1 ? tokens[1] : "/";
+
+            String responseBody;
+
+            if ("/".equals(path)) {
+                responseBody = "<html><body><h1>Welcome to My Java HTTP Server</h1></body></html>";
+            } else {
+                responseBody = "<html><body><h1>404 Not Found</h1></body></html>";
+            }
+
+            String response =
+                    "HTTP/1.1 200 OK\r\n" +
+                            "Content-Type: text/html\r\n" +
+                            "Content-Length: " + responseBody.length() + "\r\n" +
+                            "Connection: close\r\n" +
+                            "\r\n" +
+                            responseBody;
+
+            out.write(response.getBytes());
+            out.flush();
+            socket.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Multi threaded Http Server:
+package org.example.networking;
+
+import java.io.*;
+import java.net.*;
+
+class ClientHandler extends Thread {
+    private Socket socket;
+
+    public ClientHandler(Socket socket) {
+        this.socket = socket;
+    }
+
+    public void run() {
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            OutputStream out = socket.getOutputStream();
+
+            String requestLine = in.readLine();
+            System.out.println("Request: " + requestLine);
+
+            if (requestLine == null) {
+                socket.close();
+                return;
+            }
+
+            String path = requestLine.split(" ")[1];
+            String responseBody;
+
+            switch (path) {
+                case "/":
+                    responseBody = "<h1>Hello from Multi-threaded Java HTTP Server" + Thread.currentThread().getName() + "</h1>";
+
+                    break;
+                case "/time":
+                    responseBody = "<h1>Server Time: " + java.time.LocalTime.now() + "</h1>";
+                    break;
+                default:
+                    responseBody = "<h1>404 Not Found</h1>";
+            }
+
+            String response =
+                    "HTTP/1.1 200 OK\r\n" +
+                            "Content-Type: text/html\r\n" +
+                            "Content-Length: " + responseBody.length() + "\r\n" +
+                            "Connection: close\r\n\r\n" +
+                            responseBody;
+
+            out.write(response.getBytes());
+            out.flush();
+            socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class MultiThreadHttpServer {
+
+    public static void main(String[] args) throws Exception {
+        ServerSocket serverSocket = new ServerSocket(8080);
+        System.out.println("🌐 Multi-threaded HTTP Server running at http://localhost:8080");
+
+        while (true) {
+            Socket client = serverSocket.accept();
+            new ClientHandler(client).start();
+        }
+    }
+}
+
+
