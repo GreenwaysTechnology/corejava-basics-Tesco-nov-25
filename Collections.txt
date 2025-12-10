@@ -1,4 +1,4 @@
-					 Collections
+												 Collections
 
 
 1. Collections Framework Overview
@@ -9,8 +9,8 @@ Main interfaces:
 | Group     | Interfaces                   | Implementations                            |
 | --------- | ---------------------------- | ------------------------------------------ |
 | **List**  | List                         | ArrayList, LinkedList, Vector              |
-| **Set**   | Set, SortedSet, NavigableSet | HashSet, LinkedHashSet, TreeSet            |
-| **Queue** | Queue, Deque, BlockingQueue  | PriorityQueue, ArrayDeque                  |
+| **Set**   | Set,			 SortedSet, NavigableSet | HashSet, LinkedHashSet, TreeSet            |
+| **Queue** | Queue,   Deque, BlockingQueue  | PriorityQueue, ArrayDeque                  |
 | **Map**   | Map, SortedMap, NavigableMap | HashMap, LinkedHashMap, TreeMap, Hashtable |
 
 
@@ -287,65 +287,140 @@ System.out.println(sorted); // [1, 5, 10]
 
 5. Map Interface
 ⭐ 5.1 HashMap – Key/Value fast lookup
+ Order is based on hash values of keys - order is unpredictable 
+
 Real-Time Case: Count frequency of words
 
-import java.util.*;
+package org.tesco.map;
 
-public class WordCount {
+import java.util.HashMap;
+
+class Employee {
+    private int id;
+    private String name;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+public class HashMapDemo {
     public static void main(String[] args) {
-        String text = "apple banana apple mango";
+        HashMap<Integer, String> map = new HashMap<>();
+        map.put(1, "Alice");
+        map.put(8999, "Murugan");
+        map.put(2, "Subramanian");
+        System.out.println(map);
 
-        Map<String, Integer> map = new HashMap<>();
+        HashMap<Integer, Employee> empMap = new HashMap<>();
+        empMap.put(1, new Employee(1, "Ram"));
+        empMap.put(100, new Employee(2, "Karthik"));
+        empMap.put(18733, new Employee(3, "Kumar"));
+        empMap.put(454, new Employee(45, "Subu"));
+        System.out.println(empMap);
 
-        for (String word : text.split(" ")) {
-            map.put(word, map.getOrDefault(word, 0) + 1);
-        }
-
-        System.out.println(map); 
     }
 }
 
 ⭐ 5.2 LinkedHashMap – Order preserved
-Real-Time: Cache (access order)
-Map<Integer, String> map = new LinkedHashMap<>();
-map.put(1, "A");
-map.put(2, "B");
+insertion order
 
-System.out.println(map); // {1=A, 2=B}
+package org.tesco.map;
 
+
+import java.util.LinkedHashMap;
+
+public class LinkdedHashMapDemo {
+    public static void main(String[] args) {
+        LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+        map.put(1, "Alice");
+        map.put(8999, "Murugan");
+        map.put(2, "Subramanian");
+        System.out.println(map);
+
+        LinkedHashMap<Integer, Employee> empMap = new LinkedHashMap<>();
+        empMap.put(1, new Employee(1, "Ram"));
+        empMap.put(100, new Employee(2, "Karthik"));
+        empMap.put(18733, new Employee(3, "Kumar"));
+        empMap.put(454, new Employee(45, "Subu"));
+        System.out.println(empMap);
+    }
+}
 ⭐ 5.3 TreeMap – Sorted by keys	
-TreeMap<Integer, String> tm = new TreeMap<>();
-tm.put(20, "B");
-tm.put(5, "A");
-tm.put(15, "C");
+ -Sorting based on Elements Natural Order
+package org.tesco.map;
 
-System.out.println(tm); // sorted by key
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
+
+public class TreeMapDemo {
+    public static void main(String[] args) {
+        TreeMap<Integer, String> map = new TreeMap<>();
+        map.put(1, "Alice");
+        map.put(8999, "Murugan");
+        map.put(2, "Subramanian");
+        System.out.println(map);
+
+        TreeMap<Integer, Employee> empMap = new TreeMap<>();
+        empMap.put(1, new Employee(1, "Ram"));
+        empMap.put(100, new Employee(2, "Karthik"));
+        empMap.put(18733, new Employee(3, "Kumar"));
+        empMap.put(454, new Employee(45, "Subu"));
+        System.out.println(empMap);
+    }
+}
+
 
 6. Advanced Collections
-⭐ 6.1 Collections Utility Class
+⭐ 6.1 Collections Utility Class : Arrays
+->To Populate arrays. 
+
 List<Integer> numbers = Arrays.asList(5, 3, 10, 7);
 Collections.sort(numbers);
 Collections.reverse(numbers);
 System.out.println(numbers);
 
-⭐ 6.2 Comparator & Comparable
-Comparable – natural order
-class Product implements Comparable<Product> {
-    int id;
-    Product(int id) { this.id = id; }
-
-    public int compareTo(Product o) {
-        return this.id - o.id;  // ascending
-    }
-}
-Comparator – custom sorting
-Comparator<Product> byIdDesc = (p1, p2) -> p2.id - p1.id;
 
 8. Concurrent Collections (Thread-safe)
-⭐ 8.1 ConcurrentHashMap
-Example: Counter in Multi-threading
-ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
-map.put("count", 0);
+package org.tesco.advancedcollections;
 
-map.compute("count", (k, v) -> v + 1);
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ConCurrentHashMapDemo {
+    public static void main(String[] args) {
+        //if any threads are adding elements into array: dont use reguarlar collection:
+        //use ThreadSafeCollection
+        ConcurrentHashMap<Integer, String> concurrentHashMap = new ConcurrentHashMap<>();
+        concurrentHashMap.put(1, "Test");
+        System.out.println(concurrentHashMap);
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 Java Streams api
+
 
