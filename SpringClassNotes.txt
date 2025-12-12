@@ -1,0 +1,724 @@
+														
+1.core java 
+JSE
+    languages-  fun,oo,exception,multi,ds,collections,networking,database connectivity,annotations,reflections
+
+2.enterprise java
+  JEE - Java Enterprise edition
+	 web apps, micro services
+ WEB
+	->Servlets,JSP
+
+Types of  web
+	1.dynamic web - building web app with user interface
+		servlets,jsp -  html
+        2.Web services
+		SOAP Web service
+		RESTFull web service - 
+	3.GraphQL
+	4.Grpc
+
+Frameworks
+	Spring framework - enterprise java 
+
+database:
+	jdbc
+		JPA-Hibernate
+
+     Spring framework with hibernate/jpa app
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+							Spring framework / Spring boot - web services and database programming
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+										Spring Framework
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+What is Spring framework?
+
+   Spring Framework is java framework which implements the most of the design patterns and principles for building enterprise java application.
+
+........................................................................................................................................................................................................................................
+									 History Of Spring Framework
+.......................................................................................................................................................................................................................................
+Early 2000,Java become very popular for building distributed Applications.
+
+Java technology can be classified into three editions
+
+1.JSE 
+   -Core java programming language
+2.JEE
+   -Building distributed apps 
+3.JME
+   -Device apps like mobile
+
+.........................................................................................................................................................................................................................................
+						                             JEE -Enterprise Specification
+........................................................................................................................................................................................................................................
+JEE Platform spec : 
+    containers /app containers/tools
+
+1.Web Technology spec
+ Java servlet
+ JSP
+ JSF
+ WebSocket
+ JSTL
+ EL
+
+2.Enterprise Application spec
+EJB
+JPA -ORM
+JMS
+JTA
+DI
+Context and DI
+Concurrency Util
+
+3.Web Services
+
+SOAP based  -JAX-WS
+REST Based  -JAX-RS
+
+4.Management and Security technologies
+.........................................................................
+Java EE Security spec
+Java Auth
+Java authorization
+JAVA EE additional spec
+JMX -Jmeter
+
+..........................................................................................................................................................................................................................................
+									  Complexity of JEE Spec and implementation
+........................................................................................................................................................................................................................................
+
+JEE enterprise/distributed application:
+..............................................................
+
+......................................................................................................................
+Client Layer         Web Layer      Biz layer      Data Layer/Persistency
+.....................................................................................................................
+Browser              Servlet/JSP       EJB               EJB  - Entity Beans
+
+
+EJB :Enterprise Java Bean
+  Java Object(bean) can support distributed biz operations
+eg: incase of shopping cart
+  I have a bean(java object) which has three apis addToCart, Checkout, Payment
+
+Api classifications:
+1.Session Bean  - to represent biz logic---jdbc--DML
+2.Enitity bean  -ORM - Object to Table mapping-First ORM solution---Hibernate
+3.Message Driven Bean - Message driven systems-RabbitMQ, JMS
+
+			Rod Johnson  was working in enterprise banking application with JEE, 
+								he faced lot of 
+complexity in designing EJB driven systems, so he decided to move out EJB from JEE application, he wrote book called expert  J2EE Development without EJB -  "Expert One-one-One J2EE Design and Development"
+
+He proposed a model  that model later on came as The project in "Spring Season" - Spring Framework.
+...................................................................................................................................................................................
+Client Layer         Web Layer      Biz layer            	         Data Layer/Persistency
+....................................................................................................................................................................................
+Browser              Spring MVC     Spring Services          Spring-ORM - Spring- data
+....................................................................................................................................................................................
+
+Spring development objective is "POJO". (Plain Old Java Object)
+
+	When you build enterprise java apps, no plumbing(boiler plate code),Spring framework takes care that plumbing.
+
+Since Java is Object Oriented Programming language.   Apps built on java collection of objects.
+
+Object Oriented Principles:
+...........................................
+1.Abstraction
+2.Encapsulation
+3.Hierarchy
+4.Typing
+5.Modularity
+----------------------
+6.Concurrency
+7.Persistency
+
+........................................................................................................................................................................................................................................
+							   		  1.Object Management :Hierarchy
+..........................................................................................................................................................................................................................................
+Object Relationship
+
+-HAS-A -  Composition
+-IS-A - Inheritance
+
+Enterprise application challenges:
+  1.Object Management
+
+class Order {
+   Product product
+}
+
+class Customer{
+   Order order
+}
+
+class Product {
+  Item item
+}
+class Item {
+
+}
+Customer information
+ ->Order
+     -Product
+        -Item
+
+You have to create Object for every class
+You have to pass object reference to every Object - HAS-A
+
+new Customer(new Order(new Item()))
+
+..........................................................................................................................................................................................................................................
+											IOC : Inversion of Control
+............................................................................................................................................................................................................................................In enterprise application object creation and linking objects are so complex that should be removed from the developer.
+
+..........................................................................................................................................................................................................................................
+											IOC : Inversion of Control
+............................................................................................................................................................................................................................................In enterprise application object creation and linking objects are so complex that should be removed from the developer.
+
+
+Someone should take care object creation and linking= 
+  =>This process is called as IOC.
+The IOC suggest the automation program, that program called as IOC Container.
+
+Management - creating object and maintaining its relationship references
+			-developer via code
+
+Do Opposite - Don't create object , don't management object life cycle
+ 				  IOC
+Some body has to create objects and manage its relationship - "Automated Program"
+	   -IOC Container
+
+IOC container implementation:
+ 	-Spring framework provides at core ICO container - Spring Context
+
+Spring framework is "java Application" which is used to build java distributed app.
+		Spring takes care of creating "objects and links those objects" -IOC Container.
+
+
+............................................................................................................................................................................................................................
+								Spring Application
+........................................................................................................................................................................................................................
+   The application is written in java technology, executed on Spring Container which is runtime for spring applications.spring container runs on jvm
+
+
+			  Spring Application
+				 |
+			   Spring Container
+				 |
+				JVM
+What is framework?
+   One Stop Solution
+	 Collection of tools and technologies provided in one place to build end to end applications mostly.
+  
+
+What spring framework offers?
+ Spring offers collection of many projects.
+
+1.Core:
+IoC container,
+Events, 
+Resources, 
+i18n,
+Validation,
+Data Binding,
+Type Conversion, 
+SpEL,
+AOP.
+
+2.Spring MVC
+3.Spring cloud
+etc....
+https://spring.io/projects/
+
+1.Core:
+IoC container,
+Events, 
+Resources, 
+i18n,
+Validation,
+Data Binding,
+Type Conversion, 
+SpEL,
+AOP.
+
+2.Spring MVC
+3.Spring cloud
+etc....
+https://spring.io/projects/
+
+For implementing IOC and DI, spring offers three technique
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										Spring is based on Configuration
+
+Three types of configuration:
+
+1.XML driven - old way of configuration
+2.Java Config Driven - after xml
+3.Boot Driven - highly automated configuration system.
+
+We are going to see all types of configuration...
+Spring is based on Configuration:
+
+Three types of configuration:
+
+1.XML driven - old way of configuration
+2.Java Config Driven - after xml
+3.Boot Driven - highly automated configuration system.
+
+We are going to see all types of configuration...
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									Spring Core Concepts
+.........................................................................................................................................................................................................................................
+Spring Core Concepts:
+
+1.Spring Bean
+
+What is Bean?
+
+  Bean is terminology coined by SUN Micro System to name java object.
+
+Object vs Bean?
+
+ -Same but Bean has some special characteristics  which was proposed by SUN micro system via "Java Bean Spec".
+
+t is java class, based Java Bean standards
+ 	-class should be public
+ 	-properties should be private
+ 	-set and get methods - Accessors and mutators
+	-constructors
+
+Why Bean Spec?
+  - in order to standardize the java dev process- Coding Standards.
+
+public class Customer {
+  private  int id;
+  private String name;
+}
+    					"Spring  follows java bean spec in order to create object and links objects"
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+											  	 Spring Bean Creation(Object)
+.........................................................................................................................................................................................................................................
+Who creates Spring Beans?
+
+ -Spring Container
+    Spring container is java object, which manages object(bean) life cycle like   create,use,destroy.
+
+
+How spring beans are created?
+
+-> you must have bean definitions outside application biz logic
+-> sp container reads that bean definitions, initializes the beans.
+
+Architecture:
+
+			POJO Classes(Bean)
+				 |
+  		  Spring-Application <====>Spring Container
+      				config file-------------- |
+					|
+		       Fully configured System
+
+	Spring Bean Definitions(file) instructs Spring Container how to create objects(order of creations) and how to link (DI) objects
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+							Spring Application Configuration Management
+							.....................................................................................
+Spring Application can be configured in many ways
+
+1.XML files  -  Old and Legacy.
+
+2.Java Config + Annotations -Modern way
+
+  2.1 Java Config -Manual - Write Configuration and logic
+
+   Here Dev need to write Configuration and biz logic , which makes app dev slower.
+
+Just Focus logic, automate configuration itself - Auto Config
+
+3.AutoConfig:
+    Framework must take care of configuration based on various conditions like
+ i want web and jpa , messaging.
+                        "Birth of Spring Boot"
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+											Spring Project Setup 
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+We are going to learn 
+ How to work with xml based config
+ How to work with java based config
+ How to work with boot based config
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									 Spring and Object Creation
+...................................................................................................................................................................................................................................
+
+In order to create object by spring, we need a configuration system.
+
+1.XML based configuration- very very old-nobody is using today, but which is foundation for modern spring configuration(auto-spring boot)
+
+2.java config - new way of configuration used today- auto config.
+
+
+XML based configuration:
+1.config xml
+
+place beans.xml in the class path - resources/beans.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    Bean definitions-->
+    <bean id="greeterService" class="com.ibm.spring.core.beans.GreeterService"/>
+</beans>
+package com.ibm.spring.core.beans;
+
+package org.tesco.hasa;
+
+public class Employee {
+    private int id;
+    private String name;
+    //has-a
+    private Address address;
+
+    public Employee() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Employee(int id, String name, Address address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                '}';
+    }
+}
+package org.tesco.hasa;
+
+public class Address {
+    private String city;
+
+    public Address() {
+    }
+
+    public Address(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "city='" + city + '\'' +
+                '}';
+    }
+}
+
+beans.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    Bean definitions-->
+    <bean id="address" class="org.tesco.hasa.Address">
+        <property name="city" value="Coimbatore"/>
+    </bean>
+    <bean id="employee" class="org.tesco.hasa.Employee">
+        <property name="id" value="1"/>
+        <property name="name" value="Subramanian Murugan"/>
+        <!--     -->
+        <property name="address" ref="address"/>
+    </bean>
+
+</beans>
+package org.tesco.hasa;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class SpringXMLConfig {
+    public static void main(String[] args) {
+        //Read bean definitions from the spring container
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        //read bean
+        Employee employee = context.getBean(Employee.class);
+        System.out.println(employee);
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 Java Config
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+1.Introduction of Annotation driven programming
+
+What is Java Config?
+
+JavaConfig <=======> beans.xml
+  but it is pure java Program.
+
+Why Java config?
+  Java Config was introduced to remove XML,
+
+The XML is outside spring.
+Spring need to parse xml file and construct objects accordingly
+Which is heavy weight.
+Spring introduced new configuration system which is written in java itself.
+
+
+package org.tesco.javaconfig;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Employee {
+    private int id;
+    private String name;
+
+    @Autowired
+    private Address address;
+
+    public Employee() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Employee(int id, String name, Address address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                '}';
+    }
+}
+package org.tesco.javaconfig;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Address {
+    private String city;
+
+    public Address() {
+    }
+
+    public Address(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "city='" + city + '\'' +
+                '}';
+    }
+}
+package org.tesco.javaconfig;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+//beans.xml
+@Configuration
+public class AppConfig {
+
+    //create java objects and like <bean> definitions in beans.xml
+    @Bean
+    public Address address() {
+        return new Address("Coimbatore");
+    }
+
+    @Bean
+    public Employee employee() {
+        return new Employee();
+    }
+
+}
+package org.tesco.javaconfig;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class JavaConfigMain {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Employee employee = context.getBean(Employee.class);
+        employee.setId(1);
+        employee.setName("Subramanian Murugan");
+        System.out.println(employee);
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										     Spring Boot						........................................................................................................................................................................................................................................
+								How to remove bean creations from the java config
+.......................................................................................................................................................................................................................................
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										        Auto Configuration
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Spring allows us automatically configure your spring application based on bean definitions in the "class path"
+
+How to opt-in auto configuration?
+
+@EnableAutoConfiguration
+
+      Enable auto-configuration of the Spring Application Context, attempting to guess and configure beans that you are likely to need. 
+Auto-configuration classes are usually applied based on your class path and what beans you have defined.
+
+    Reduce boiler plate configuration and allow developer to start spring projects with minimal setup (Zero Configuration Philosophy) 
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										Birth of  "Spring Boot"
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Spring boot was created as separate project from Spring framework.
+2013- Spring boot Project started by Phil Webb and Dave Syer at Pivotal
+Goal:
+ To reduce complete Configuration system - Zero Configuration.
+
+Key ideas :
+1.Auto Configuration
+     Based on class path and defined beans
+2.Starters
+     New way of defining project dependencies - POM Dependencies
+		spring-boot-web-starters
+				|
+				which includes all default configuration files and dependencies including ready made server(embedded tomcat)
+3.Embeded servers
+           No need for external server deployments (Tomcat,Jetty,Netty)
+4.Actuator 
+          Exposes in built metrics api, health checks apis
+
+						Using spring boot you can do opinioned Development
+
+		Spring Boot is built on the top of Spring Framework + Auto Configuration + Embedded Server + Convention 
+
+
+for ex, i want to connect to database called MySQL, i need to configure datasources, connection informations ,transactions, hibernate and jpa configurations...
+In the bean definitions..
+  But in Spring 5.x autoconfiguration helps to configure spring app in easy way based on "opinions" such i want database, i want to build webservice, i want to enable logging, i want to enable caching, i want to enable SomeXXX...
+
+if i want, add that jar in the class path, spring provides most of the common settings to kick start app as quick as possible.
+
+ Spring team, created a separate project based on "auto configuration" , that is called "Spring Boot".
+
+Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run".
+
+We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need minimal Spring configuration.
+
+Spring Boot Focus Mainly Configuration
+
+1.Build Configuration - lib configuration -pom.xml
+2.Application Configuration - Beans and spring managed components-services ,repositories
+
+Why Spring Boot?
+
+Spring Boot  starters reduces build dependency - POM Dependencies/project dependencies  Autoconfiguration reduces the App Dependency
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								How to begin with spring boot application?
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+You can create standalone spring boot app 
+You can create web spring boot app
+
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								How to begin with spring boot application?
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+You can create standalone spring boot app 
+You can create web spring boot app
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+											Standalone Spring boot Application
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+
+
+
+
