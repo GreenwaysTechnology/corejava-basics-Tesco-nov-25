@@ -1,0 +1,1387 @@
+								   Spring Boot REST API Development
+..........................................................................................................................................................................................................................................
+
+In General , we can build many types of apps in Spring boot
+
+Common types of apps
+
+1.CommandLine application.
+2.Web Applications
+3.Message Oriented Application
+etc...
+
+
+Web Applications:
+
+1.Dynamic Web Application:
+          Type of web application which talks to data sources, read data , build html pages.
+   Users finally access html pages...
+
+Building web sites.
+
+How to build Dynamic web application in Spring /Spring Boot?
+Spring provides a module/project called "Spring-MVC"
+
+
+2.Web Service
+ 1.SOAP Web Service -Spring Web Services-4.0.10
+  2.RestFull Web Services  - Spring MVC
+  3.GraphQL -  Alternate to REST
+...........................................................................................................................................................................................................................................
+							Spring boot and REST full web service Development
+........................................................................................................................................................................................................................................
+
+What is REST?
+
+RE-Representational 
+S-State 
+T-Transfer
+
+RE-Representational
+  Data format - JSON, XML, AVRO, PROTOBuf ,pdf, media
+S - State 
+   Data - Objects and Collections
+
+T- Transfer
+  Data is converted into any format which is user interested and transfer over http protocol.
+
+REST is  just specification which was released as part of http specification by co author of http protocol , Roy Fielding.
+
+https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
+
+.......................................................................................................................................................................................................................................
+									   REST Working Principles
+......................................................................................................................................................................................................................................
+
+REST Works based on HTTP protocol and its semantic verbs
+
+POST -----> CREATE
+GET ------ >READ
+PUT | PATCH--------->UPDATE
+DELETE-------DELETE
+
+CURD Operations
+........................................................................................................................................................................................................................................
+Steps to build REST API
+
+1.Resource
+  Domain model, eg Order,Customer,Student,Trainer,Subject
+
+2.Expose api
+ 	  Every resource has api , which helps to transfer and get data from and to...
+
+3.Connect to DataSource
+   Every api connects to data source in order to get data/read data..
+
+How to represent Resource?
+
+public class OrderController {
+
+}
+
+How to Expose api?
+
+
+public class OrderController{
+
+ //apis
+  public List<Orders> findAll(){}
+  public Order findById(Long id){}
+  public Orders create(Order order){}
+}
+
+how resource and apis are mapped with "HTTP" protocol?
+
+1.Every resource must be identified by unique "URL" "/api/orders"
+
+2.Every api is identified by "http verbs" - GET,POST,PUT,DELETE
+
+How to map url and map http verbs in spring?
+
+ Spring MVC offers annotations
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								Spring boot with Restful web development
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+In order to run web apps, we need web container.
+Spring boot brings embedded web container - tomcat by default.
+
+Spring boot web apps are packaged as "fat jar/uber jar" file.
+
+Spring web app/REST APP Types:
+..........................................................
+
+1.Blocking web app
+   default web app
+ 	Spring Module is "spring-web" / "spring-mvc"
+2.Non Blocking web app
+	 Spring module is "spring-web flux"
+
+...........................................................................................................................................................................................................................................
+								 Spring boot Rest api development
+
+1.create project with following dependency(core)
+ project can be created 
+  ->standalone maven project and add dependency.
+  ->spring initializer 
+    https://start.spring.io/
+
+pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.ibm.spring</groupId>
+	<artifactId>springrestapp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>springrestapp</name>
+	<description>Demo Project for Spring Rest</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+
+package com.ibm.web;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RestApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(RestApplication.class, args);
+	}
+
+}
+
+After Running we can test application:
+http://localhost:8080/
+
+We get White lable Error.
+
+ if you see this message then your app is running successfully.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										API Development
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+1.Define Resource
+ In Spring Resource is called "Controller" so the name of the Resource would be like below
+  CustomerController,OrderController
+
+package com.ibm.web.api.hello;
+
+public class HelloController {
+}
+
+
+2.Define api inside Resource
+
+   findAll, findById,save,update,remove
+
+package com.ibm.web.api.hello;
+
+
+public class HelloController {
+
+    public String sayHello() {
+        return "Hello";
+    }
+}
+
+
+3.Use Annotations to mark Resource apis..
+
+In order to convert normal class and methods into Rest aware
+
+Annotations:
+1.@RestController - @Controller
+2.@RequestMapping -  URL mapper
+3.Method annotations
+  @GetMapping
+  @PostMapping
+  @PutMapping
+  @DeleteMapping
+
+
+eg:
+package com.ibm.web.api.hello;
+
+//Bean : @Component,@Service,@Respository,@Controller(Dynamic web app),@RestController
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+//Resource
+@RestController
+@RequestMapping("/api/hello")
+public class HelloController {
+
+    //api -method
+    @GetMapping
+    public String sayHello(){
+        return  "Hello";
+    }
+}
+
+package com.ibm.web.api.hello;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+
+@SpringBootApplication
+public class SpringHelloControllerMain {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringHelloControllerMain.class, args);
+    }
+
+}
+Testing:
+
+GET http://localhost:8080/api/hello
+
+Response:
+Hello
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										Spring MVC
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+MVC stands for Model View Controller is popular design pattern to build web apps.
+
+M- Model - State-Data - Entity 
+V- Presentation - User Interface - In REST there is no UI Layer
+C- Controller - Object which handles incoming http request and send response 
+
+In Rest we have Model - data and C controller, what about biz logic
+
+Biz logic
+    -Fetching data from data sources, storing data into data sources
+
+Biz logic representation in Spring:
+
+1.Service Beans 
+2.Repository Beans
+
+Eg:
+package com.ibm.web.api.mvc.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class HelloService {
+
+    public String sayHello(){
+        return "Hello!";
+    }
+}
+
+package com.ibm.web.api.mvc;
+
+import com.ibm.web.api.mvc.service.HelloService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api")
+public class HelloController {
+    @Autowired
+    private HelloService helloService;
+    @GetMapping
+    @RequestMapping("/hello")
+    public String sayHello() {
+        //call biz logic
+        return helloService.sayHello();
+    }
+}
+package com.ibm.web.api.mvc;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MVCMain {
+    public static void main(String[] args) {
+        SpringApplication.run(MVCMain.class);
+    }
+}
+...............................................................................................................................................................................................................................				  								 How to read data from the user
+.................................................................................................................................................................................................................................
+
+How to pass input to the api?
+
+There are two ways to pass data to the rest api?
+
+1.As part of URL - Parameters
+2.As part of Body -Payload
+
+Parameters:
+       Passing data via  URL 
+	http://www.example.com/api/something/param
+	http://www.example.com/api/something ?param=paramvalue&anotherparam=anothervalue
+
+Parameter Types:
+
+1.Path Parameter
+2.Query Parameter
+3.Matrix Parameter - optional
+
+1.Path Parameter:
+   creating dynamic urls
+
+http://localhost:8080/products/1
+http://localhost:8080/products/2
+http://localhost:8080/products/3
+http://localhost:8080/products/4
+
+HTTP Request structure:
+
+Request contains two segments.
+
+1.Request Headers
+  Http Request header, meta information about on going request - sent by client to the server
+2.Request body
+  Data what we pass.
+
+Parameters vs Payload
+  Parameters and payload both are used to pass data to the server
+parameters are sent via url but payload is via body 
+
+eg:
+package com.ibm.restapp.parameters.path;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("products")
+public class ProductsController {
+
+    @GetMapping
+    public String findAll() {
+        return "products";
+    }
+
+    @GetMapping
+    @RequestMapping("{id}")
+    public String findById(@PathVariable("id") Long id) {
+        return "Product  " + id;
+    }
+}
+
+Testing:
+http://localhost:8080/products/10
+http://localhost:8080/products/1
+http://localhost:8080/products/13
+
+.....................................................................................
+			  Hot Reloading/Live Reloading feature
+.....................................................................................
+
+Without restarting the server manually every time, when ever code changes, the feature we can add called "hot reloading" through which we can restart the server automatically.
+
+How to enable live reloading?
+
+pom.xml
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-devtools</artifactId>
+ <optional>true</optional>
+</dependency>
+
+if you are working in IntelliJ Idea,
+ you have to do some settings
+File--->settings--compiler-->Build Project automatically
+File---settings-Advanced Settings--->Allow auto make to start even if developed is currently running
+..........................................................................................................................................................................................................................................
+									Query Parameter/Query String
+........................................................................................................................................................................................................................................
+
+Passing more than one parameters
+
+Syntax:
+products/filter?category=food&pricegreterthan=100&pricelessthan=5
+
+category is variable
+food is value
+& is delimiter to separate out other variables.
+
+Here we have three variables
+category
+pricegreterthan
+pricesslessthan
+
+
+package com.ibm.restapp.parameters.path;
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("products")
+public class ProductsController {
+
+      @GetMapping
+    @RequestMapping("filter")
+    public String filter(@RequestParam("category") String category, @RequestParam("pricegreaterthan") Long pricegreterthan, @RequestParam("pricelessthan") Long pricelessthan) {
+        return category + pricegreterthan + pricelessthan;
+    }
+}
+
+
+Testing:
+http://localhost:8080/products/filter?category=food&pricegreaterthan=5&pricelessthan=100
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+									How to send payload to the server
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+RE -Representational State Transfer.
+ Sending data in the various format.
+
+Rest supports various data formats
+  -XML,JSON,Avro,protobuf,html,pdf,doc....
+
+Now  a days, JSON is most popular data format.
+
+How to send json from the client and how spring converts into java object?
+
+JSON:
+ java script object notation, is data format invented in 2000 for sending and receiving data from web and to web.
+JSON is plain text or ascii file , very light weight format.
+
+JSON Parser is program which converts string to object and object to string.
+
+JSON (string) To java -  string to object
+Java object to JSON(string) - object to string.
+
+Spring boot has in built json parser called "Jackson" parser.
+
+Use case: 
+ I am going to send product details as json, and inside spring boot we convert into product object.
+
+package com.ibm.restapp.parameters.path;
+
+import com.ibm.restapp.entity.Product;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("products")
+public class ProductsController {
+
+  
+    @PostMapping
+    public String create(@RequestBody Product product) {
+        System.out.println(product);
+        return "saved";
+    }
+
+    
+}
+
+Testing:
+
+POST /products
+
+{
+    "id": 21,
+    "name": "caret",
+    "qty": 100,
+    "category": "veg"
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&											 Return Types
+..........................................................................................................................................................................................................................................
+
+What we can return from api?
+
+There are many return types
+1.String
+2.Object- Collections or Object
+3.ResponseEntity
+4.void
+5.Reactive Types - Mono/Flux - Web Flux
+
+Based on Return type , content/type would be converted
+
+1.String - plain/text
+2.Object/Collection - application/json
+3.ResponseEntity -  plain/text or application/json
+4.void - only status code
+5.Reactive - application/json or any type
+
+
+Response:
+ The response can have two things.
+1.payload - Data which is returned
+2.Meta data-headers
+  Headers are just variables which hold some values which describe the nature of response.
+
+Response Headers:
+
+1.Content-Type
+
+Content-Type: text/html; charset=utf-8
+
+The MIME type of this content. What type of data server is sending to client.
+
+
+Response Headers:
+
+1.Content-Type
+
+Content-Type: text/html; charset=utf-8
+
+The MIME type of this content. What type of data server is sending to client.
+
+Basic content type of web is:
+
+  HTML
+  Plain/text
+
+Rest content type is :
+  
+  Representational State Transfer
+      |             |
+   Data Format     Data
+      |
+json
+xml
+pdf
+word
+etc...
+By Default in REST is "json"
+
+2.Content-Length
+
+Content-Length: 348
+
+The length of the response body expressed in 8-bit bytes
+
+3.Date
+Date: Tue, 15 Nov 1994 08:12:31 GMT
+
+The date and time that the message was sent (in “HTTP-date” format as defined by RFC 7231)
+
+4.keep-alive
+  It is header which talks how long the http connection can exits between server and client default is 60ms
+
+5.Connection
+Connection: close
+
+Control options for the current connection and list of hop-by-hop response fields. Deprecated in HTTP/2
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+								Sending Status Code
+...........................................................................................................................................................................................................................................
+HTTP operation Status:
+
+-> informational response - 100 to 199-1X
+-> success response -  200-299-2X
+-> Redirects  - 300-399 -3X
+-> client errors - 400-499 -4X
+-> server errrors - 500-599 - 5X
+
+ "By default spring sends 200 status for all success request and response."
+
+
+What if i want to send some special status code?
+
+According to Rest , Post method must return 201.
+
+"By default spring sends 200 status for all success request and response."
+
+What if i want to send some special status code?
+
+According to Rest , Post method must return 201.
+
+How to add StatusCode in the Response?
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public String create(@RequestBody Product product) {
+        System.out.println(product);
+        return "saved";
+    }
+....................................................................................
+				String
+....................................................................................
+
+    @GetMapping
+    public String findAll() {
+        return "products";
+    }
+
+ content-type:
+  text/plain
+......................................................................................................................................................................................................................................
+								Objects and Collections
+...................................................................................................................................................................................................................................
+.....................................................................................
+				Objects and Collections
+....................................................................................
+package com.ibm.restapp.response;
+
+import com.ibm.restapp.entity.Customer;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("customers")
+public class Customers {
+
+    @GetMapping
+    public List<Customer> findAll() {
+        List<Customer> customers = List.of(
+                new Customer(1, "Subramanian", "Coimbatore"),
+                new Customer(2, "Murugan", "Coimbatore"),
+                new Customer(3, "Karthik", "Chennai")
+
+        );
+        return customers;
+    }
+}
+...................................................................................
+                      How to return single Customer(Object)
+
+package com.ibm.restapp.response;
+
+import com.ibm.restapp.entity.Customer;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("customers")
+public class Customers {
+
+    List<Customer> customers;
+
+    @Bean
+    public CommandLineRunner commandLineRunner() {
+        return (arg) -> {
+            customers = List.of(
+                    new Customer(1, "Subramanian", "Coimbatore"),
+                    new Customer(2, "Murugan", "Coimbatore"),
+                    new Customer(3, "Karthik", "Chennai"),
+                    new Customer(4, "Ram", "Delhi")
+            );
+        };
+    }
+
+
+
+    @GetMapping
+    public List<Customer> findAll() {
+        return customers;
+    }
+
+    @GetMapping
+    @RequestMapping("single")
+    public Customer findBySingleCustomer() {
+        return  new Customer(1,"Subramanian","Coimbatore");
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+							
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										CURD 
+...................................................................................................................................................................................................................................
+
+CREATE
+UPDATE
+READ 
+DELETE
+
+I am going to implement CURD Using In Memory data , without any database.
+
+
+Entity:
+package com.ibm.curd.entity;
+
+public class Product {
+    private Long id;
+    private String name;
+    private double price;
+
+    public Product() {
+    }
+
+    public Product(Long id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
+
+Service:
+package com.ibm.curd.service;
+
+import com.ibm.curd.entity.Product;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service
+public class ProductService {
+    //Inmemory database via Map
+    private final Map<Long, Product> productMap = new HashMap<>();
+    private long idCounter = 1;
+
+    //findAll Products
+    public List<Product> findAll() {
+        return new ArrayList<>(productMap.values());
+    }
+
+    public Product findById(Long id) {
+        return productMap.get(id);
+    }
+
+    public Product create(Product product) {
+        product.setId(idCounter++);
+        productMap.put(product.getId(), product);
+        return product;
+    }
+
+    public Product update(Long id, Product product) {
+        Product existingProduct = productMap.get(id);
+        if (existingProduct != null) {
+            existingProduct.setName(product.getName());
+            existingProduct.setPrice(product.getPrice());
+        }
+        return existingProduct;
+    }
+
+    public boolean deleteProduct(Long id) {
+        return productMap.remove(id) != null;
+    }
+
+}
+package com.ibm.curd.controller;
+
+import com.ibm.curd.entity.Product;
+import com.ibm.curd.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping
+    public List<Product> findAll() {
+        List<Product> products = productService.findAll();
+        System.out.println(products);
+        return  products;
+    }
+
+    @GetMapping
+    @RequestMapping("filter")
+    public List<Product> filterByName(@RequestParam("name") String name) {
+        List<Product> products = productService.getProductsByName(name);
+        System.out.println(products);
+        return products;
+    }
+
+    @GetMapping
+    @RequestMapping("{id}")
+    public Product findById(@PathVariable("id") Long id) {
+        Product product = productService.findById(id);
+        System.out.println(product);
+        return product;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product save(@RequestBody Product product) {
+        Product newProduct = productService.create(product);
+        System.out.println(newProduct);
+        return newProduct;
+    }
+
+    @PutMapping("{id}")
+    public Product update(@PathVariable Long id, @RequestBody Product product) {
+        Product updatedProduct = productService.update(id, product);
+        System.out.println(updatedProduct);
+        return updatedProduct;
+    }
+
+    @DeleteMapping("{id}")
+    public String delete(@PathVariable Long id) {
+        return productService.deleteProduct(id) ? "Deleted" : "Not Found";
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										     Response Entity
+........................................................................................................................................................................................................................................
+What if i want to send data with custom headers? and custom status code.
+
+ReponseEntity is Object, used to encapuslate meta data.
+
+..................................................................................
+		     Response Entity
+...................................................................................
+
+What if i want to send data with custom headers? and custom status code.
+
+ReponseEnity is Object, used to encapuslate meta data.
+
+package com.ibm.restapp.response;
+
+import com.ibm.restapp.entity.Customer;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("customers")
+public class Customers {
+
+    List<Customer> customers;
+
+    @Bean
+    public CommandLineRunner commandLineRunner() {
+        return (arg) -> {
+            customers = List.of(
+                    new Customer(1, "Subramanian", "Coimbatore"),
+                    new Customer(2, "Murugan", "Coimbatore"),
+                    new Customer(3, "Karthik", "Chennai"),
+                    new Customer(4, "Ram", "Delhi")
+            );
+        };
+    }
+
+
+//    @PostMapping
+////    @ResponseStatus(HttpStatus.CREATED)
+//    public Customer create(@RequestBody Customer customer) {
+//        return customer;
+//    }
+
+    @PostMapping
+    public ResponseEntity<Customer> create(@RequestBody Customer customer) {
+        return ResponseEntity.status(201)
+                .header("name", "IBM")
+                .header("location", "Bangalore")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(customer);
+    }
+
+    @GetMapping
+    public List<Customer> findAll() {
+        return customers;
+    }
+
+    @GetMapping
+    @RequestMapping("single")
+    public Customer findBySingleCustomer() {
+        return new Customer(1, "Subramanian", "Coimbatore");
+    }
+}
+.....................................................................................
+			void -Return
+...................................................................................
+
+void return type does not say to return data, rather return status code.
+
+package com.ibm.restapp.response;
+
+import com.ibm.restapp.entity.Customer;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("customers")
+public class Customers {
+
+    @DeleteMapping
+    @RequestMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") Long id) {
+        System.out.println("deleting by id : " + id);
+    }
+
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 Reactive Type
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Blocking programming 
+nonblocking programming
+.........................................................................................................................................................................................................................................
+							Traditional web (Blocking)  vs Reactive/ Non Blocking  web application
+....................................................................................................................................................................................................................................
+What is Reactive Programming?
+
+      Reactive programming is kind of declarative programming, by combing many design patterns (Observer able ,Iterable ,functional programming   concepts-pure function)
+
+
+Why reactive programming? or What is purpose of reactive programming?
+
+ Reactive programming helps to transfer data within application or across application
+ in async way.
+The reactive-stack web framework, Spring WebFlux, has been added to Spring 5. It is fully non-blocking, supports reactive streams back pressure, and runs on such servers as Netty, Undertow, and Servlet 3.1+ containers.
+
+Reactive Stack:
+
+ Reactive is new programming model, helps to build non blocking / async applications.
+ 
+
+Traditional web vs Reactive/NonBlocking  web application:
+.........................................................
+
+How we use threads,thats where the difference.
+
+In traditional web applications, every request is mapped against a separate dedicated thread - this is called as "Request Per thread Model"
+
+for eg in 1ms , the webserver recieves 100 requests, the web server will have 100 threads.
+
+Request Per thread model drawbacks:
+
+1.Operating system need to maintain so much threads, so that os need more memory, and also operating system need to do context switch a lot, so cpu power is used heavily..
+
+How to manage this?
+
+ We need less threads, thats where new technology was created called "non blocking and async"
+
+Non blocking arch brought  new threading model, where as having limited no of threads, we can achive maximum concurrency...
+
+Threads are reused by multiple request--response handling.
+........................................................................................................................................................................................................................................
+							Spring and Nonblocking arch
+....................................................................................................................................................................................................................................
+
+Webflux is framework built on the top of "Project reactor", which is spring wrapper..
+
+WebFlux provides a feature to build async and non blocking apps.
+
+Webflux web server is not tomcat, rather we use "netty" server which is non blocking server..
+
+
+How to create non blocking/ webflux apps?
+
+Note:
+ you cant mix blocking and nonblocking dependencies in a single project...
+
+Web Flux/Project reactor provides 2 objects:
+
+1.Flux<T>
+  Using flux we can emit 0..N elements
+
+2.Mono<T>
+  Using Mono we can emit at most single element.
+
+publisher - publishes events
+
+
+events
+ 1.data event -onNext
+ 2.error event -onError
+ 3.complete event -onComplete
+
+Mono /Flux - Publisher type
+ Mono publishes one event 
+  Mono-fireevent-complete
+
+ Flux publishes events one by one 
+   Flux wont be completed until last item
+  FLux.just(1,2)
+   flux- fire event with 1----consume
+         fire event with 2...consume
+
+
+subscriber
+  who listens for events
+  in webflux world subscriber is built in.
+  webflux subscriber writes data into http outputstream(response
+
+operator
+  methods which are used to create stream , transform, filter stream
+
+ just - operator
+ range -operator
+
+Project;
+
+pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>ibm.spring.reactive</groupId>
+	<artifactId>springreactive</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>springreactive</name>
+	<description>Demo project for Spring Boot</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+Mono:
+package com.ibm.nonblocking.mono;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("hello")
+public class GreeterController {
+
+    //Non blocking api
+    @GetMapping
+    public Mono<String> sayHello() {
+        System.out.println(Thread.currentThread().getName());
+        return Mono.just("Hello");
+    }
+
+    @GetMapping
+    @RequestMapping("messages")
+    public Mono<List<String>> greetings() {
+        return Mono.just(List.of("Hello","Hai"));
+    }
+
+}
+Flux:
+package com.ibm.nonblocking.flux;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+
+@RequestMapping("flux")
+@RestController
+public class FluxController {
+
+    @GetMapping
+    public Flux<Integer> getValues() {
+        return Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    }
+
+    @GetMapping
+    @RequestMapping("range")
+    public Flux<Integer> getRange() {
+        return Flux.range(1, 100);
+    }
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										CURD operation using Spring web flux
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+package ibm.spring.reactive.curd;
+
+public class Product {
+    private String id;
+    private  String name;
+    private double price;
+
+    public Product() {
+    }
+
+    public Product(String id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
+
+
+
+package ibm.spring.reactive.curd;
+
+import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Repository
+public class ProductRepository {
+    private final Map<String, Product> productMap = new ConcurrentHashMap<>();
+
+    //save
+    public Mono<Product> save(Product product) {
+        productMap.put(product.getId(), product);
+        return Mono.just(product);
+    }
+
+    public Mono<Product> findById(String id) {
+        Product product = productMap.get((id));
+        return product != null ? Mono.just(product) : Mono.empty();
+    }
+
+    public Flux<Product> findAll() {
+        return Flux.fromIterable(productMap.values());
+    }
+
+    public Mono<Product> update(String id, Product updatedProduct) {
+        if (productMap.containsKey(id)) {
+            updatedProduct.setId(id);
+            productMap.put(id, updatedProduct);
+            return Mono.just(updatedProduct);
+        }
+        return Mono.empty();
+    }
+
+    public Mono<Void> deleteById(String id) {
+        productMap.remove(id);
+        return Mono.empty();
+    }
+}
+
+
+package ibm.spring.reactive.curd;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+
+@Service
+public class ProductService {
+    @Autowired
+    private ProductRepository repository;
+
+    public Mono<Product> save(Product product) {
+        return repository.save(product);
+    }
+
+    public Mono<Product> findById(String id) {
+        return repository.findById(id);
+    }
+
+    public Flux<Product> findAll() {
+        return repository.findAll();
+    }
+
+    public Mono<Product> update(String id, Product product) {
+        return repository.update(id, product);
+    }
+
+    public Mono<Void> deleteById(String id) {
+        return repository.deleteById(id);
+    }
+}
+
+package ibm.spring.reactive.curd;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+
+    @Autowired
+    private ProductService productService;
+
+    @PostMapping
+    public Mono<Product> create(@RequestBody Product product) {
+        return productService.save(product);
+    }
+
+    @GetMapping
+    public Flux<Product> findAll() {
+        return productService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Mono<Product> findById(@PathVariable String id) {
+        return productService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Mono<Product> update(@PathVariable String id, @RequestBody Product product) {
+        return productService.update(id, product);
+    }
+
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable String id) {
+        return productService.deleteById(id);
+    }
+
+}
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
